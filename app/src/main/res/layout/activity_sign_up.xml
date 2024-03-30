@@ -68,7 +68,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
-        android:id="@+id/editTextText4"
+        android:id="@+id/passwordField"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -83,10 +83,10 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText5" />
+        app:layout_constraintTop_toBottomOf="@+id/emailField" />
 
     <EditText
-        android:id="@+id/editTextText5"
+        android:id="@+id/emailField"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -104,7 +104,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
 
     <EditText
-        android:id="@+id/editTextText6"
+        android:id="@+id/confirmPasswordField"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -120,10 +120,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText4" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordField" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/createAccountButton"
         android:layout_width="270dp"
         android:layout_height="40dp"
         android:layout_marginTop="68dp"
@@ -134,7 +134,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText6" />
+        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordField" />
 
     <TextView
         android:id="@+id/textView8"
@@ -187,7 +187,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintTop_toBottomOf="@+id/createAccountButton" />
 
     <TextView
         android:id="@+id/textView10"
