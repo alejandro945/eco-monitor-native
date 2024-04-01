@@ -62,7 +62,7 @@ class SignUpActivity : AppCompatActivity() {
         val account = GoogleSignIn.getSignedInAccountFromIntent(result.data).result
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         Firebase.auth.signInWithCredential(credential)
-            .addOnSuccessListener { showMessage(SUCCESS_MESSAGE) ; finish() }
+            .addOnSuccessListener { showMessage(SUCCESS_MESSAGE) ; finish() } //TODO - We might want to redirect the user to the main menu of the application.
             .addOnFailureListener { showMessage(it.message!!) }
     }
 
