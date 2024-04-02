@@ -55,7 +55,7 @@ class SignUpActivity: AppCompatActivity() {
         when(status) {
             is AuthenticationStatus.SuccessStatus -> { showMessage(status.message); finish() }
             is AuthenticationStatus.ErrorStatus -> showMessage(status.message)
-            is AuthenticationStatus.LoadingStatus -> showMessage(status.message)
+            is AuthenticationStatus.LoadingStatus -> { /* showMessage(status.message) */ }
         }
     }
 

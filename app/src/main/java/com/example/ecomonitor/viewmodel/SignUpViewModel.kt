@@ -20,25 +20,34 @@ class SignUpViewModel(
     val status: LiveData<AuthenticationStatus> get() = _status
 
     fun signIn(token: String?) {
-        token?.let {
+        token?.let { t ->
             _status.value = LoadingStatus(LOADING_MESSAGE)
-            viewModelScope.launch(Dispatchers.IO) {
-                val value = authRepository.signIn(it)
-                withContext(Dispatchers.Main) { _status.value = value }
-            }
-        } ?: { ErrorStatus(EMPTY_TOKEN) }
+            executeRepositorySignIn(t)
+        } ?: {
+            _status.value = ErrorStatus(EMPTY_TOKEN)
+        }
+    }
+
+    private fun executeRepositorySignIn(token: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = authRepository.signIn(token)
+            withContext(Dispatchers.Main) { _status.value = result }
+        }
     }
 
     fun signUp(email: String, password: String, repeatPassword: String) {
-        if (password != repeatPassword) {
-            _status.value = ErrorStatus(MISMATCH_MESSAGE)
-            return
-        } else {
+        if (password == repeatPassword) {
             _status.value = LoadingStatus(LOADING_MESSAGE)
-            viewModelScope.launch(Dispatchers.IO) {
-                val value = authRepository.signUp(email, password)
-                withContext(Dispatchers.Main) { _status.value = value }
-            }
+            executeRepositorySignUp(email, password)
+        } else {
+            _status.value = ErrorStatus(MISMATCH_MESSAGE)
+        }
+    }
+
+    private fun executeRepositorySignUp(email: String, password: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val result = authRepository.signUp(email, password)
+            withContext(Dispatchers.Main) { _status.value = result }
         }
     }
 
