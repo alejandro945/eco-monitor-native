@@ -16,6 +16,7 @@ import com.example.ecomonitor.viewmodel.SignUpViewModel
 class SignUpActivity: AppCompatActivity() {
     private val binding by lazy { ActivitySignUpBinding.inflate(layoutInflater) }
     private val viewModel: SignUpViewModel by viewModels()
+
     private lateinit var googleSignInLauncher: ActivityResultLauncher<Intent>
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,13 +27,7 @@ class SignUpActivity: AppCompatActivity() {
         binding.googleSignUpButton.setOnClickListener { signUpWithGoogle() }
         binding.textView10.setOnClickListener { finish() }
 
-        viewModel.status.observe(this) { status ->
-            when(status) {
-                is AuthenticationStatus.SuccessStatus -> { showMessage(status.message); finish() }
-                is AuthenticationStatus.ErrorStatus -> showMessage(status.message)
-                is AuthenticationStatus.LoadingStatus -> showMessage(status.message)
-            }
-        }
+        viewModel.status.observe(this) { status -> updateUI(status) }
 
         googleSignInLauncher = registerForActivityResult(StartActivityForResult(), ::afterGoogleSignUp)
     }
@@ -53,6 +48,14 @@ class SignUpActivity: AppCompatActivity() {
         result.data?.let {
             val token = GoogleSignInUtil.retrieveTokenFromIntent(it)
             viewModel.signIn(token)
+        }
+    }
+
+    private fun updateUI(status: AuthenticationStatus) {
+        when(status) {
+            is AuthenticationStatus.SuccessStatus -> { showMessage(status.message); finish() }
+            is AuthenticationStatus.ErrorStatus -> showMessage(status.message)
+            is AuthenticationStatus.LoadingStatus -> showMessage(status.message)
         }
     }
 

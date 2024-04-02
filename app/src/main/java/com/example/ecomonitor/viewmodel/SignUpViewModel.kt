@@ -17,8 +17,8 @@ class SignUpViewModel(
     private val authRepository: AuthRepository = FirebaseAuthRepository()
 ): ViewModel() {
     private val _status = MutableLiveData<AuthenticationStatus>()
-
     val status: LiveData<AuthenticationStatus> get() = _status
+
     fun signIn(token: String?) {
         token?.let {
             _status.value = LoadingStatus(LOADING_MESSAGE)
