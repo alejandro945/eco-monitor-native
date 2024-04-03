@@ -3,20 +3,56 @@ package com.example.ecomonitor
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import com.example.ecomonitor.databinding.ActivitySignInBinding
+import com.example.ecomonitor.model.AuthenticationStatus
+import com.example.ecomonitor.util.GoogleSignInUtil
+import com.example.ecomonitor.util.UIUtil.Companion.showMessage
+import com.example.ecomonitor.viewmodel.SignInViewModel
 
 class SignInActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySignInBinding.inflate(layoutInflater) }
+    private val viewModel: SignInViewModel by viewModels()
+
+    private lateinit var googleSignInLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-        binding.toRegistrationButton.setOnClickListener { register() }
+        binding.googleSignInButton.setOnClickListener { signInWithGoogle() }
+        binding.toRegistrationButton.setOnClickListener { toSignUpScreen() }
+
+        viewModel.status.observe(this) { status -> updateUI(status) }
+
+        googleSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::afterGoogleSignIn)
     }
 
-    private fun register() {
+    private fun signInWithGoogle() {
+        val intent = GoogleSignInUtil.createGoogleSignInIntent(this)
+        googleSignInLauncher.launch(intent)
+    }
+
+    private fun afterGoogleSignIn(result: ActivityResult) {
+        result.data?.let {
+            val token = GoogleSignInUtil.retrieveTokenFromIntent(it)
+            viewModel.signIn(token)
+        }
+    }
+
+    private fun toSignUpScreen() {
         val intent = Intent(this, SignUpActivity::class.java)
         startActivity(intent)
+    }
+
+    private fun updateUI(status: AuthenticationStatus) {
+        when(status) {
+            is AuthenticationStatus.SuccessStatus -> showMessage(this, status.message)
+            is AuthenticationStatus.ErrorStatus -> showMessage(this, status.message)
+            is AuthenticationStatus.LoadingStatus -> { /* showMessage(this, status.message) */ }
+        }
     }
 }

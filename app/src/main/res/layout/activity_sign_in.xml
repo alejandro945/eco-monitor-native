@@ -199,29 +199,14 @@
         app:srcCompat="@drawable/left_line" />
 
     <ImageView
-        android:id="@+id/imageView13"
+        android:id="@+id/googleSignInButton"
         android:layout_width="58dp"
         android:layout_height="44dp"
         android:layout_marginTop="16dp"
-        android:layout_marginRight="25dp"
         android:background="@drawable/login_options_background"
-        app:layout_constraintEnd_toStartOf="@+id/imageView14"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:srcCompat="@drawable/apple_icon" />
-
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="58dp"
-        android:layout_height="44dp"
-        android:background="@drawable/login_options_background"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView13"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView13"
-        app:layout_constraintTop_toTopOf="@+id/imageView13"
         app:srcCompat="@drawable/google_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
