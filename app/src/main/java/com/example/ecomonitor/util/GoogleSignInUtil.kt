@@ -10,7 +10,7 @@ class GoogleSignInUtil {
         fun createGoogleSignInIntent(activity: Activity): Intent {
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
-                .requestIdToken(GOOGLE_SIGN_IN_KEY) // TODO - We need to remove this key from the codebase.
+                .requestIdToken(GOOGLE_CLIENT_ID) // TODO - We need to remove this key from the codebase.
                 .build()
             return GoogleSignIn.getClient(activity, gso).signInIntent
         }
@@ -20,6 +20,6 @@ class GoogleSignInUtil {
             return account.idToken
         }
 
-        private const val GOOGLE_SIGN_IN_KEY = "390179189698-rjd3v42it2rv1sd8dvruap6jh5pspnih.apps.googleusercontent.com"
+        private const val GOOGLE_CLIENT_ID = "478518882408-epgv6r1v3d1cnbfqiublqdes8b4tej3j.apps.googleusercontent.com"
     }
 }

@@ -5,6 +5,13 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        getByName("debug") {
+            storeFile =
+                file("./debug.keystore")
+            storePassword = "android"
+        }
+    }
     namespace = "com.example.ecomonitor"
     compileSdk = 34
 
@@ -16,6 +23,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig = signingConfigs.getByName("debug")
     }
 
     buildTypes {
