@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "478518882408",
+    "project_id": "eco-monitor-5facf",
+    "storage_bucket": "eco-monitor-5facf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:478518882408:android:22e97bb15e4c97a32fcbdd",
+        "android_client_info": {
+          "package_name": "com.example.ecomonitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "478518882408-igqnc5crf4chf7jmfc8sk6fho154fp1e.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.ecomonitor",
+            "certificate_hash": "fdd9df343f6b79bcc171a6db09b3e5fff9dd542e"
+          }
+        },
+        {
+          "client_id": "478518882408-epgv6r1v3d1cnbfqiublqdes8b4tej3j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxqkJiAwUQ9aUXOozWAU03JM0LEErovqY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "478518882408-epgv6r1v3d1cnbfqiublqdes8b4tej3j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
