@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 is AppAuthState.Success -> {
-                    Toast.makeText(this, "Bienvenido ${it.userID}", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Bienvenido a Ecomonitor ${it.userID}", Toast.LENGTH_LONG).show()
                 }
             }
         }
