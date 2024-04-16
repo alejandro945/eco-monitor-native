@@ -1,4 +1,4 @@
-package com.example.ecomonitor.model
+package com.example.ecomonitor.domain.model
 
 sealed class AuthenticationStatus {
     data class SuccessStatus(val message: String): AuthenticationStatus()

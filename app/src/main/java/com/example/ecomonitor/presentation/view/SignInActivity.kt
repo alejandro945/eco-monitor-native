@@ -1,4 +1,4 @@
-package com.example.ecomonitor
+package com.example.ecomonitor.presentation.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -8,10 +8,10 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.example.ecomonitor.databinding.ActivitySignInBinding
-import com.example.ecomonitor.model.AuthenticationStatus
-import com.example.ecomonitor.util.GoogleSignInUtil
-import com.example.ecomonitor.util.UIUtil.Companion.showMessage
-import com.example.ecomonitor.viewmodel.SignInViewModel
+import com.example.ecomonitor.domain.model.AuthenticationStatus
+import com.example.ecomonitor.presentation.util.GoogleSignInUtil
+import com.example.ecomonitor.presentation.util.UIUtil.Companion.showMessage
+import com.example.ecomonitor.presentation.viewmodel.SignInViewModel
 
 class SignInActivity : AppCompatActivity() {
     private val binding by lazy { ActivitySignInBinding.inflate(layoutInflater) }

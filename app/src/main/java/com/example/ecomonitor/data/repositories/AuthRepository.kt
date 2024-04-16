@@ -1,6 +1,6 @@
-package com.example.ecomonitor.repositories
+package com.example.ecomonitor.data.repositories
 
-import com.example.ecomonitor.model.AuthenticationStatus
+import com.example.ecomonitor.domain.model.AuthenticationStatus
 
 interface AuthRepository {
     suspend fun signIn(email: String, password: String): AuthenticationStatus

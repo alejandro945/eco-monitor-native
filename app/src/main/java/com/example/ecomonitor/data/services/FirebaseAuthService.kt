@@ -1,4 +1,4 @@
-package com.example.ecomonitor.services
+package com.example.ecomonitor.data.services
 
 import com.google.firebase.Firebase
 import com.google.firebase.auth.AuthCredential

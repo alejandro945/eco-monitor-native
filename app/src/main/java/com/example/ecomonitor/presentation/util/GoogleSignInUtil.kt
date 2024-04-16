@@ -1,4 +1,4 @@
-package com.example.ecomonitor.util
+package com.example.ecomonitor.presentation.util
 
 import android.app.Activity
 import android.content.Intent

@@ -1,13 +1,13 @@
-package com.example.ecomonitor.repositories
+package com.example.ecomonitor.data.repositories
 
-import com.example.ecomonitor.model.AuthenticationStatus
-import com.example.ecomonitor.model.AuthenticationStatus.Companion.ACCOUNT_CREATED_MESSAGE
-import com.example.ecomonitor.model.AuthenticationStatus.Companion.EMPTY_FIELDS_MESSAGE
-import com.example.ecomonitor.model.AuthenticationStatus.Companion.NULL_MESSAGE
-import com.example.ecomonitor.model.AuthenticationStatus.Companion.SIGN_IN_SUCCESS_MESSAGE
-import com.example.ecomonitor.model.AuthenticationStatus.SuccessStatus
-import com.example.ecomonitor.model.AuthenticationStatus.ErrorStatus
-import com.example.ecomonitor.services.FirebaseAuthService
+import com.example.ecomonitor.domain.model.AuthenticationStatus
+import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.ACCOUNT_CREATED_MESSAGE
+import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.EMPTY_FIELDS_MESSAGE
+import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.NULL_MESSAGE
+import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.SIGN_IN_SUCCESS_MESSAGE
+import com.example.ecomonitor.domain.model.AuthenticationStatus.SuccessStatus
+import com.example.ecomonitor.domain.model.AuthenticationStatus.ErrorStatus
+import com.example.ecomonitor.data.services.FirebaseAuthService
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.GoogleAuthProvider
 

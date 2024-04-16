@@ -1,12 +1,12 @@
-package com.example.ecomonitor
+package com.example.ecomonitor.presentation.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.ecomonitor.databinding.ActivitySignUpBinding
-import com.example.ecomonitor.model.AuthenticationStatus
-import com.example.ecomonitor.util.UIUtil.Companion.showMessage
-import com.example.ecomonitor.viewmodel.SignUpViewModel
+import com.example.ecomonitor.domain.model.AuthenticationStatus
+import com.example.ecomonitor.presentation.util.UIUtil.Companion.showMessage
+import com.example.ecomonitor.presentation.viewmodel.SignUpViewModel
 
 class SignUpActivity: AppCompatActivity() {
     private val binding by lazy { ActivitySignUpBinding.inflate(layoutInflater) }

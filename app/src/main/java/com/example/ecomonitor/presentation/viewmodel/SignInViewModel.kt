@@ -1,14 +1,14 @@
-package com.example.ecomonitor.viewmodel
+package com.example.ecomonitor.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ecomonitor.model.AuthenticationStatus
-import com.example.ecomonitor.model.AuthenticationStatus.Companion.EMPTY_TOKEN
-import com.example.ecomonitor.model.AuthenticationStatus.Companion.LOADING_MESSAGE
-import com.example.ecomonitor.repositories.AuthRepository
-import com.example.ecomonitor.repositories.FirebaseAuthRepository
+import com.example.ecomonitor.domain.model.AuthenticationStatus
+import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.EMPTY_TOKEN
+import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.LOADING_MESSAGE
+import com.example.ecomonitor.data.repositories.AuthRepository
+import com.example.ecomonitor.data.repositories.FirebaseAuthRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

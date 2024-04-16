@@ -1,4 +1,4 @@
-package com.example.ecomonitor.util
+package com.example.ecomonitor.presentation.util
 
 import android.content.Context
 import android.widget.Toast
