@@ -23,12 +23,19 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        binding.signInButton.setOnClickListener { signIn() }
         binding.googleSignInButton.setOnClickListener { signInWithGoogle() }
         binding.toRegistrationButton.setOnClickListener { toSignUpScreen() }
 
         viewModel.status.observe(this) { status -> updateUI(status) }
 
         googleSignInLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(), ::afterGoogleSignIn)
+    }
+
+    private fun signIn() {
+        val email = binding.signInEmailField.text.toString()
+        val password = binding.signInPasswordField.text.toString()
+        viewModel.signIn(email, password)
     }
 
     private fun signInWithGoogle() {
@@ -50,9 +57,14 @@ class SignInActivity : AppCompatActivity() {
 
     private fun updateUI(status: AuthenticationStatus) {
         when(status) {
-            is AuthenticationStatus.SuccessStatus -> showMessage(this, status.message)
+            is AuthenticationStatus.SuccessStatus -> toMainMenu()
             is AuthenticationStatus.ErrorStatus -> showMessage(this, status.message)
             is AuthenticationStatus.LoadingStatus -> { /* showMessage(this, status.message) */ }
         }
+    }
+
+    private fun toMainMenu() {
+        val intent = Intent(this, MainMenuActivity::class.java)
+        startActivity(intent)
     }
 }
