@@ -1,7 +1,8 @@
-package com.example.ecomonitor
+package com.example.ecomonitor.presentation.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.ecomonitor.R
 
 class SignUpActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
