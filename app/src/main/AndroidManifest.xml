@@ -21,6 +21,9 @@
             android:name=".presentation.view.SignUpActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.view.MainActivity"
+            android:exported="true" />
+        <activity
             android:name=".presentation.view.SignInActivity"
             android:exported="true">
             <intent-filter>

@@ -23,6 +23,8 @@ class SignInActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        viewModel.logEvent(this, "first_app_launch")
+
         binding.signInButton.setOnClickListener { signIn() }
         binding.googleSignInButton.setOnClickListener { signInWithGoogle() }
         binding.toRegistrationButton.setOnClickListener { toSignUpScreen() }
