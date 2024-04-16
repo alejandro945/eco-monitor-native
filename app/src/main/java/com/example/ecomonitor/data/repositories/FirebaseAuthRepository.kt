@@ -15,13 +15,7 @@ class FirebaseAuthRepository(
     private val firebaseAuthService: FirebaseAuthService = FirebaseAuthService()
 ): AuthRepository {
     override suspend fun signIn(email: String, password: String): AuthenticationStatus {
-        return try {
-            val user = firebaseAuthService.signIn(email, password).user
-            SuccessStatus(SIGN_IN_SUCCESS_MESSAGE + user!!.email)
-        }
-        catch (exception: FirebaseAuthException) { ErrorStatus(exception.errorCode) }
-        catch (exception: NullPointerException) { ErrorStatus(NULL_MESSAGE) }
-        catch (exception: IllegalArgumentException) { ErrorStatus(EMPTY_FIELDS_MESSAGE) }
+        TODO("Not yet implemented")
     }
 
     override suspend fun signIn(token: String): AuthenticationStatus {

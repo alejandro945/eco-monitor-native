@@ -33,9 +33,7 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun signIn() {
-        val email = binding.signInEmailField.text.toString()
-        val password = binding.signInPasswordField.text.toString()
-        viewModel.signIn(email, password)
+        TODO("Not yet implemented")
     }
 
     private fun signInWithGoogle() {

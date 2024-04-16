@@ -20,15 +20,7 @@ class SignInViewModel(
     val status: LiveData<AuthenticationStatus> get() = _status
 
     fun signIn(email: String, password: String) {
-        _status.value = AuthenticationStatus.LoadingStatus(LOADING_MESSAGE)
-        executeRepositorySignIn(email, password)
-    }
-
-    private fun executeRepositorySignIn(email: String, password: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            val result = authRepository.signIn(email, password)
-            withContext(Dispatchers.Main) { _status.value = result }
-        }
+        TODO("Not yet implemented")
     }
 
     fun signIn(token: String?) {

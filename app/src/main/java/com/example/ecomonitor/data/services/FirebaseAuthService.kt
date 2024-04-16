@@ -9,16 +9,16 @@ import kotlinx.coroutines.tasks.await
 
 class FirebaseAuthService(
     private val service: FirebaseAuth = Firebase.auth
-) {
-    suspend fun signIn(email: String, password: String): AuthResult {
-        return service.signInWithEmailAndPassword(email, password).await()
+): AuthService {
+    override suspend fun signIn(email: String, password: String): AuthResult {
+        TODO("Not yet implemented")
     }
 
-    suspend fun signIn(credential: AuthCredential): AuthResult {
+    override suspend fun signIn(credential: AuthCredential): AuthResult {
         return service.signInWithCredential(credential).await()
     }
 
-    suspend fun signUp(email: String, password: String): AuthResult {
+    override suspend fun signUp(email: String, password: String): AuthResult {
         return service.createUserWithEmailAndPassword(email, password).await()
     }
 }
