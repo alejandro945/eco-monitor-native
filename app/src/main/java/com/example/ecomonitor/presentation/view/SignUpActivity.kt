@@ -26,6 +26,7 @@ class SignUpActivity: AppCompatActivity() {
         val email = binding.emailField.text.toString()
         val password = binding.passwordField.text.toString()
         val repeatPassword = binding.confirmPasswordField.text.toString()
+        val role =
         viewModel.signUp(email, password, repeatPassword)
     }
 
