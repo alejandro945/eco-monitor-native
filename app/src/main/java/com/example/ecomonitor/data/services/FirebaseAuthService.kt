@@ -48,11 +48,4 @@ class FirebaseAuthService(
     override suspend fun signUp(email: String, password: String): AuthResult {
        return service.createUserWithEmailAndPassword(email, password).await()
     }
-
-    /**
-     * Signs out the current user.
-     */
-    override suspend fun signOut() {
-        service.signOut()
-    }
 }
