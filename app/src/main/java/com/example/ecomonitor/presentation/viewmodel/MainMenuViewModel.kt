@@ -1,13 +1,10 @@
 package com.example.ecomonitor.presentation.viewmodel
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ecomonitor.data.repositories.AnalyticsRepository
 import com.example.ecomonitor.data.repositories.AuthRepository
-import com.example.ecomonitor.data.repositories.FirebaseAnalyticsRepository
 import com.example.ecomonitor.data.repositories.FirebaseAuthRepository
 import com.example.ecomonitor.domain.model.AuthenticationStatus
 import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.LOADING_MESSAGE

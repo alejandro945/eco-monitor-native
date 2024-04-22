@@ -3,7 +3,6 @@ package com.example.ecomonitor.presentation.view
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.example.ecomonitor.R
 import com.example.ecomonitor.databinding.ActivityMainMenuBinding
 import com.example.ecomonitor.domain.model.AuthenticationStatus
 import com.example.ecomonitor.presentation.util.UIUtil

@@ -30,19 +30,11 @@ class SignInViewModel(
     }
 
     fun signIn(email: String, password: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-
-            withContext(Dispatchers.Main){
-                _status.value = AuthenticationStatus.LoadingStatus(LOADING_MESSAGE  )
-            }
-            val result = authRepository.signIn(email,password)
-            withContext(Dispatchers.Main){_status.value = result}
-        }
+        executeRepositorySignIn(email, password)
     }
 
     fun signIn(token: String?) {
         token?.let { t ->
-            _status.value = AuthenticationStatus.LoadingStatus(LOADING_MESSAGE)
             executeRepositorySignIn(t)
         } ?: {
             _status.value = AuthenticationStatus.ErrorStatus(EMPTY_TOKEN)
@@ -51,7 +43,20 @@ class SignInViewModel(
 
     private fun executeRepositorySignIn(token: String) {
         viewModelScope.launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main){
+                _status.value = AuthenticationStatus.LoadingStatus(LOADING_MESSAGE)
+            }
             val result = authRepository.signIn(token)
+            withContext(Dispatchers.Main) { _status.value = result }
+        }
+    }
+
+    private fun executeRepositorySignIn(email: String, password: String) {
+        viewModelScope.launch(Dispatchers.IO) {
+            withContext(Dispatchers.Main){
+                _status.value = AuthenticationStatus.LoadingStatus(LOADING_MESSAGE  )
+            }
+            val result = authRepository.signIn(email, password)
             withContext(Dispatchers.Main) { _status.value = result }
         }
     }
