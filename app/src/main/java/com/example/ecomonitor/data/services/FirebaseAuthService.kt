@@ -11,7 +11,7 @@ class FirebaseAuthService(
     private val service: FirebaseAuth = Firebase.auth
 ): AuthService {
     override suspend fun signIn(email: String, password: String): AuthResult {
-        TODO("Not yet implemented")
+        return Firebase.auth.createUserWithEmailAndPassword(email, password).await()
     }
 
     override suspend fun signIn(credential: AuthCredential): AuthResult {
