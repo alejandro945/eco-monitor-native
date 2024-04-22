@@ -12,11 +12,11 @@ class FirebaseAuthService(
 ): AuthService {
 
     override suspend fun signOut() {
-        return Firebase.auth.signOut()
+        return service.signOut()
     }
 
     override suspend fun signIn(email: String, password: String): AuthResult {
-        return Firebase.auth.signInWithEmailAndPassword(email, password).await()
+        return service.signInWithEmailAndPassword(email, password).await()
     }
 
     override suspend fun signIn(credential: AuthCredential): AuthResult {
