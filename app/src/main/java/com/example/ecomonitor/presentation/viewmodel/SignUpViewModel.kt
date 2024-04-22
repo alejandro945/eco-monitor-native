@@ -11,6 +11,7 @@ import com.example.ecomonitor.domain.model.AuthenticationStatus.ErrorStatus
 import com.example.ecomonitor.domain.model.AuthenticationStatus.LoadingStatus
 import com.example.ecomonitor.data.repositories.AuthRepository
 import com.example.ecomonitor.data.repositories.FirebaseAuthRepository
+import com.example.ecomonitor.domain.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -21,18 +22,18 @@ class SignUpViewModel(
     private val _status = MutableLiveData<AuthenticationStatus>()
     val status: LiveData<AuthenticationStatus> get() = _status
 
-    fun signUp(email: String, password: String, repeatPassword: String) {
-        if (password == repeatPassword) {
+    fun signUp(user: User) {
+        if (user.password == user.repeatPassword) {
             _status.value = LoadingStatus(LOADING_MESSAGE)
-            executeRepositorySignUp(email, password)
+            executeRepositorySignUp(user)
         } else {
             _status.value = ErrorStatus(MISMATCH_MESSAGE)
         }
     }
 
-    private fun executeRepositorySignUp(email: String, password: String) {
+    private fun executeRepositorySignUp(user: User) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = authRepository.signUp(email, password)
+            val result = authRepository.signUp(user)
             withContext(Dispatchers.Main) { _status.value = result }
         }
     }

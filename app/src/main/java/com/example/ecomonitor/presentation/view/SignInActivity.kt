@@ -35,10 +35,9 @@ class SignInActivity : AppCompatActivity() {
     }
 
     private fun signIn() {
-        viewModel.signIn(
-            binding.signInEmailField.text.toString(),
-            binding.signInPasswordField.text.toString()
-        )
+        val email = binding.signInEmailField.text.toString()
+        val password = binding.signInPasswordField.text.toString()
+        viewModel.signIn(email, password)
     }
 
     private fun signInWithGoogle() {
