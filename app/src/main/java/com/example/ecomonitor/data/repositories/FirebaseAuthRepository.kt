@@ -8,12 +8,23 @@ import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.SIGN_I
 import com.example.ecomonitor.domain.model.AuthenticationStatus.SuccessStatus
 import com.example.ecomonitor.domain.model.AuthenticationStatus.ErrorStatus
 import com.example.ecomonitor.data.services.FirebaseAuthService
+import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.SIGN_OUT_SUCCESS_MESSAGE
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.GoogleAuthProvider
 
 class FirebaseAuthRepository(
     private val firebaseAuthService: FirebaseAuthService = FirebaseAuthService()
 ): AuthRepository {
+
+    override suspend fun signOut(): AuthenticationStatus {
+        return try {
+            firebaseAuthService.signOut()
+            SuccessStatus(SIGN_OUT_SUCCESS_MESSAGE)
+        }
+        catch (exception: FirebaseAuthException) { ErrorStatus(exception.errorCode) }
+        catch (exception: NullPointerException) { ErrorStatus(NULL_MESSAGE) }
+    }
+
     override suspend fun signIn(email: String, password: String): AuthenticationStatus {
         return try {
             val user = firebaseAuthService.signIn(email, password).user

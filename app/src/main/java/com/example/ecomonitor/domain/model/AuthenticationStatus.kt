@@ -13,5 +13,6 @@ sealed class AuthenticationStatus {
         const val NULL_MESSAGE = "The user couldn't be retrieved, try again."
         const val SIGN_IN_SUCCESS_MESSAGE = "You have logged in successfully! | "
         const val EMPTY_FIELDS_MESSAGE = "One of the required fields is empty."
+        const val SIGN_OUT_SUCCESS_MESSAGE = "You have logged out successfully! | "
     }
 }
