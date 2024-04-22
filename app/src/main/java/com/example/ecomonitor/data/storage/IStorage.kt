@@ -9,6 +9,5 @@ interface IStorage<T> {
     fun get(key: String): Task<DocumentSnapshot?>
     fun remove(key: String)
     fun update(key: String, value: T)
-
     fun list(): Task<QuerySnapshot?>
 }

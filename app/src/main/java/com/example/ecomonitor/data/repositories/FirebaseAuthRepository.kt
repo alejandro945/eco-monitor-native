@@ -1,13 +1,12 @@
 package com.example.ecomonitor.data.repositories
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import com.example.ecomonitor.data.services.AuthService
 import com.example.ecomonitor.domain.model.AuthenticationStatus
 import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.ACCOUNT_CREATED_MESSAGE
 import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.EMPTY_FIELDS_MESSAGE
 import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.NULL_MESSAGE
 import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.SIGN_IN_SUCCESS_MESSAGE
+import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.SIGN_OUT_SUCCESS_MESSAGE
 import com.example.ecomonitor.domain.model.AuthenticationStatus.SuccessStatus
 import com.example.ecomonitor.domain.model.AuthenticationStatus.ErrorStatus
 import com.example.ecomonitor.data.services.FirebaseAuthService
@@ -24,6 +23,16 @@ class FirebaseAuthRepository(
     private val authService: AuthService = FirebaseAuthService(),
     private val userService: IStorage<Profile> = FirebaseStorage("users")
 ): AuthRepository {
+
+    override suspend fun signOut(): AuthenticationStatus {
+        return try {
+            authService.signOut()
+            SuccessStatus(SIGN_OUT_SUCCESS_MESSAGE)
+        }
+        catch (exception: FirebaseAuthException) { ErrorStatus(exception.errorCode) }
+        catch (exception: NullPointerException) { ErrorStatus(NULL_MESSAGE) }
+    }
+
     override suspend fun signIn(email: String, password: String): AuthenticationStatus {
         return try {
             val user = authService.signIn(email, password).user

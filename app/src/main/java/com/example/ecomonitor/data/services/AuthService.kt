@@ -12,8 +12,8 @@ import com.google.firebase.auth.AuthResult
  * - Sign out
  */
 interface AuthService {
+    suspend fun signOut(): Unit
     suspend fun signIn(email: String, password: String): AuthResult
     suspend fun signIn(credential: AuthCredential): AuthResult
     suspend fun signUp(email: String, password: String): AuthResult
-    suspend fun signOut(): Unit
 }
