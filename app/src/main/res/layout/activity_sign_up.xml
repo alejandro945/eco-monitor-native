@@ -50,7 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
-        android:id="@+id/editTextText3"
+        android:id="@+id/nameField"
         android:layout_width="270dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="80dp"
@@ -101,7 +101,7 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText3" />
+        app:layout_constraintTop_toBottomOf="@+id/nameField" />
 
     <EditText
         android:id="@+id/confirmPasswordField"
@@ -181,6 +181,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordField" />
+        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordField"
+        app:entries="@array/Roles" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

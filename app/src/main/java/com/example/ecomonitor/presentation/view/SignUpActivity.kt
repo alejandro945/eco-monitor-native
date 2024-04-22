@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.example.ecomonitor.databinding.ActivitySignUpBinding
+import com.example.ecomonitor.domain.enum.Role
 import com.example.ecomonitor.domain.model.AuthenticationStatus
+import com.example.ecomonitor.domain.model.User
 import com.example.ecomonitor.presentation.util.UIUtil.Companion.showMessage
 import com.example.ecomonitor.presentation.viewmodel.SignUpViewModel
 
@@ -23,11 +25,13 @@ class SignUpActivity: AppCompatActivity() {
     }
 
     private fun signUpWithEmailAndPassword() {
+        val name = binding.nameField.text.toString()
         val email = binding.emailField.text.toString()
         val password = binding.passwordField.text.toString()
         val repeatPassword = binding.confirmPasswordField.text.toString()
-        val role =
-        viewModel.signUp(email, password, repeatPassword)
+        val role = binding.roleField.text.toString()
+        val user = User(name, email, password, repeatPassword, Role.valueOf(role))
+        viewModel.signUp(user)
     }
 
     private fun updateUI(status: AuthenticationStatus) {
