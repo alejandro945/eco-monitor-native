@@ -1,5 +1,7 @@
 package com.example.ecomonitor.data.repositories
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import com.example.ecomonitor.data.services.AuthService
 import com.example.ecomonitor.domain.model.AuthenticationStatus
 import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.ACCOUNT_CREATED_MESSAGE
@@ -16,6 +18,7 @@ import com.example.ecomonitor.domain.model.Profile
 import com.example.ecomonitor.domain.model.User
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.coroutines.tasks.await
 
 class FirebaseAuthRepository(
     private val authService: AuthService = FirebaseAuthService(),
@@ -36,11 +39,13 @@ class FirebaseAuthRepository(
             val credential = GoogleAuthProvider.getCredential(token, null)
             val user = authService.signIn(credential).user
             //Validates that at least a profile exists for the user if not, creates one
-            val profile = userService.get(user!!.uid)
+            val profile = userService.get(user!!.uid).await()?.let {
+                it.toObject(Profile::class.java)
+            }
             if (profile == null) {
                 userService.save(user.uid, Profile(user.displayName ?: "", user.email ?: "", Role.CLIENTE))
             }
-            SuccessStatus(SIGN_IN_SUCCESS_MESSAGE + user.email)
+            SuccessStatus(SIGN_IN_SUCCESS_MESSAGE + user!!.email)
         }
         catch (exception: FirebaseAuthException) { ErrorStatus(exception.errorCode) }
         catch (exception: NullPointerException) { ErrorStatus(NULL_MESSAGE) }

@@ -1,7 +1,9 @@
 package com.example.ecomonitor.data.storage
 
+import com.google.android.gms.tasks.Task
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.firestore
 
 
@@ -13,8 +15,8 @@ class FirebaseStorage<T : Any>(private val collectionName: String) : IStorage<T>
         firestore.collection(collectionName).document(key).set(value)
     }
 
-    override fun get(key: String): DocumentSnapshot? {
-        return firestore.collection(collectionName).document(key).get().result
+    override fun get(key: String): Task<DocumentSnapshot?> {
+        return firestore.collection(collectionName).document(key).get()
     }
 
     override fun remove(key: String) {
@@ -25,7 +27,7 @@ class FirebaseStorage<T : Any>(private val collectionName: String) : IStorage<T>
         firestore.collection(collectionName).document(key).set(value)
     }
 
-    override fun list(): List<DocumentSnapshot> {
-        return firestore.collection(collectionName).get().result.documents
+    override fun list(): Task<QuerySnapshot?> {
+        return firestore.collection(collectionName).get()
     }
 }
