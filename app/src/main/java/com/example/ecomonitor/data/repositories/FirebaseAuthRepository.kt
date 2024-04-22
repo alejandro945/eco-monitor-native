@@ -11,13 +11,15 @@ import com.example.ecomonitor.domain.model.AuthenticationStatus.ErrorStatus
 import com.example.ecomonitor.data.services.FirebaseAuthService
 import com.example.ecomonitor.data.storage.FirebaseStorage
 import com.example.ecomonitor.data.storage.IStorage
+import com.example.ecomonitor.domain.enum.Role
+import com.example.ecomonitor.domain.model.Profile
 import com.example.ecomonitor.domain.model.User
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.GoogleAuthProvider
 
 class FirebaseAuthRepository(
     private val authService: AuthService = FirebaseAuthService(),
-    private val userService: IStorage<User> = FirebaseStorage("users")
+    private val userService: IStorage<Profile> = FirebaseStorage("users")
 ): AuthRepository {
     override suspend fun signIn(email: String, password: String): AuthenticationStatus {
         return try {
@@ -33,7 +35,12 @@ class FirebaseAuthRepository(
         return try {
             val credential = GoogleAuthProvider.getCredential(token, null)
             val user = authService.signIn(credential).user
-            SuccessStatus(SIGN_IN_SUCCESS_MESSAGE + user!!.email)
+            //Validates that at least a profile exists for the user if not, creates one
+            val profile = userService.get(user!!.uid)
+            if (profile == null) {
+                userService.save(user.uid, Profile(user.displayName ?: "", user.email ?: "", Role.CLIENTE))
+            }
+            SuccessStatus(SIGN_IN_SUCCESS_MESSAGE + user.email)
         }
         catch (exception: FirebaseAuthException) { ErrorStatus(exception.errorCode) }
         catch (exception: NullPointerException) { ErrorStatus(NULL_MESSAGE) }
@@ -44,9 +51,9 @@ class FirebaseAuthRepository(
         return try {
             val authUser = authService.signUp(user.email, user.password).user
             authUser?.let {
-                userService.save(it.uid, user)
+                userService.save(it.uid, Profile(user.name, user.email, user.role))
             }
-            SuccessStatus(ACCOUNT_CREATED_MESSAGE + user!!.email)
+            SuccessStatus(ACCOUNT_CREATED_MESSAGE + user.email)
         }
         catch (exception: FirebaseAuthException) { ErrorStatus(exception.errorCode) }
         catch (exception: NullPointerException) { ErrorStatus(NULL_MESSAGE) }

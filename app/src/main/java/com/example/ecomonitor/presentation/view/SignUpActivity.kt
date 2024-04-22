@@ -1,14 +1,17 @@
 package com.example.ecomonitor.presentation.view
 
-import androidx.appcompat.app.AppCompatActivity
+import android.R
 import android.os.Bundle
+import android.widget.ArrayAdapter
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.example.ecomonitor.databinding.ActivitySignUpBinding
 import com.example.ecomonitor.domain.enum.Role
 import com.example.ecomonitor.domain.model.AuthenticationStatus
 import com.example.ecomonitor.domain.model.User
 import com.example.ecomonitor.presentation.util.UIUtil.Companion.showMessage
 import com.example.ecomonitor.presentation.viewmodel.SignUpViewModel
+
 
 class SignUpActivity: AppCompatActivity() {
     private val binding by lazy { ActivitySignUpBinding.inflate(layoutInflater) }
@@ -18,10 +21,19 @@ class SignUpActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        initRolesAdapter()
         binding.createAccountButton.setOnClickListener { signUpWithEmailAndPassword() }
         binding.textView10.setOnClickListener { finish() }
 
         viewModel.status.observe(this) { status -> updateUI(status) }
+    }
+
+    private fun initRolesAdapter() {
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
+            this,
+            R.layout.simple_dropdown_item_1line, Role.values().map { it.name }
+        )
+        binding.roleField.setAdapter(adapter)
     }
 
     private fun signUpWithEmailAndPassword() {

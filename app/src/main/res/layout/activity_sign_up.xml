@@ -175,13 +175,12 @@
         android:drawableLeft="@drawable/user_edittext_icon"
         android:drawablePadding="10dp"
         android:ems="10"
-        android:text="Role"
+        android:text="CLIENTE"
         android:textColor="#7F7F7F"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordField"
-        app:entries="@array/Roles" />
+        app:layout_constraintTop_toBottomOf="@+id/confirmPasswordField" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

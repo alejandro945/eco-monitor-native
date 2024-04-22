@@ -1,7 +1,3 @@
 <resources>
     <string name="app_name">Eco Monitor</string>
-    <string-array name="Roles">
-        <item>Proveedor</item>
-        <item>Cliente</item>
-    </string-array>
 </resources>

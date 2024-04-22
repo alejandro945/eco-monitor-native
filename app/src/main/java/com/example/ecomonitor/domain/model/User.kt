@@ -9,3 +9,9 @@ data class User(
     val repeatPassword: String,
     val role: Role
 )
+
+data class Profile(
+    val name: String,
+    val email: String,
+    val role: Role
+)
