@@ -5,29 +5,29 @@ import com.google.firebase.Firebase
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.firestore
+import kotlinx.coroutines.tasks.await
 
 
 class FirebaseStorage<T : Any>(private val collectionName: String) : IStorage<T> {
-
     private val firestore = Firebase.firestore
 
-    override fun save(key: String, value: T) {
-        firestore.collection(collectionName).document(key).set(value)
+    override suspend fun save(key: String, value: T) {
+        firestore.collection(collectionName).document(key).set(value).await()
     }
 
-    override fun get(key: String): Task<DocumentSnapshot?> {
-        return firestore.collection(collectionName).document(key).get()
+    override suspend fun get(key: String): DocumentSnapshot? {
+        return firestore.collection(collectionName).document(key).get().await()
     }
 
-    override fun remove(key: String) {
-        firestore.collection(collectionName).document(key).delete()
+    override suspend fun remove(key: String) {
+        firestore.collection(collectionName).document(key).delete().await()
     }
 
-    override fun update(key: String, value: T) {
-        firestore.collection(collectionName).document(key).set(value)
+    override suspend fun update(key: String, value: T) {
+        firestore.collection(collectionName).document(key).set(value).await()
     }
 
-    override fun list(): Task<QuerySnapshot?> {
-        return firestore.collection(collectionName).get()
+    override suspend fun list(): QuerySnapshot? {
+        return firestore.collection(collectionName).get().await()
     }
 }

@@ -21,9 +21,8 @@ import kotlinx.coroutines.tasks.await
 
 class FirebaseAuthRepository(
     private val authService: AuthService = FirebaseAuthService(),
-    private val userService: IStorage<Profile> = FirebaseStorage("users")
+    private val userStorage: IStorage<Profile> = FirebaseStorage("users")
 ): AuthRepository {
-
     override suspend fun signOut(): AuthenticationStatus {
         return try {
             authService.signOut()
@@ -47,14 +46,14 @@ class FirebaseAuthRepository(
         return try {
             val credential = GoogleAuthProvider.getCredential(token, null)
             val user = authService.signIn(credential).user
-            //Validates that at least a profile exists for the user if not, creates one
-            val profile = userService.get(user!!.uid).await()?.let {
-                it.toObject(Profile::class.java)
-            }
+
+            //Validates that a profile exists for the user and, if it doesn't, creates it.
+            val profile = userStorage.get(user!!.uid)?.toObject(Profile::class.java)
             if (profile == null) {
-                userService.save(user.uid, Profile(user.displayName ?: "", user.email ?: "", Role.CLIENTE))
+                userStorage.save(user.uid, Profile(user.uid, user.displayName ?: "", user.email ?: "", Role.CLIENTE))
             }
-            SuccessStatus(SIGN_IN_SUCCESS_MESSAGE + user!!.email)
+
+            SuccessStatus(SIGN_IN_SUCCESS_MESSAGE + user.email)
         }
         catch (exception: FirebaseAuthException) { ErrorStatus(exception.errorCode) }
         catch (exception: NullPointerException) { ErrorStatus(NULL_MESSAGE) }
@@ -64,9 +63,11 @@ class FirebaseAuthRepository(
     override suspend fun signUp(user: User): AuthenticationStatus {
         return try {
             val authUser = authService.signUp(user.email, user.password).user
+
             authUser?.let {
-                userService.save(it.uid, Profile(user.name, user.email, user.role))
+                userStorage.save(it.uid, Profile(it.uid, user.name, user.email, user.role))
             }
+
             SuccessStatus(ACCOUNT_CREATED_MESSAGE + user.email)
         }
         catch (exception: FirebaseAuthException) { ErrorStatus(exception.errorCode) }

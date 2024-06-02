@@ -40,7 +40,7 @@
         android:drawablePadding="10dp"
         android:elevation="2dp"
         android:ems="10"
-        android:hint="Usuario"
+        android:hint="Email"
         android:inputType="text"
         android:paddingHorizontal="24dp"
         android:textColor="#7F7F7F"

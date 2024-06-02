@@ -23,10 +23,7 @@ class MainMenuViewModel(
         _status.value = AuthenticationStatus.LoadingStatus(LOADING_MESSAGE)
         viewModelScope.launch(Dispatchers.IO) {
             val result = authRepository.signOut()
-            withContext(Dispatchers.Main){
-                _status.value = result
-            }
-
+            withContext(Dispatchers.Main){ _status.value = result }
         }
     }
 }

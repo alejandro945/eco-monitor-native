@@ -10,7 +10,6 @@ import kotlinx.coroutines.tasks.await
 class FirebaseAuthService(
     private val service: FirebaseAuth = Firebase.auth
 ): AuthService {
-
     /**
      * Signs out the user from the app.
      * @ Returns 'Unit' as a confirmation of the sign out operation.
