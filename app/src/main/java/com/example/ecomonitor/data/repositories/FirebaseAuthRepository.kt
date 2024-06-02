@@ -17,7 +17,6 @@ import com.example.ecomonitor.domain.model.Profile
 import com.example.ecomonitor.domain.model.User
 import com.google.firebase.auth.FirebaseAuthException
 import com.google.firebase.auth.GoogleAuthProvider
-import kotlinx.coroutines.tasks.await
 
 class FirebaseAuthRepository(
     private val authService: AuthService = FirebaseAuthService(),
