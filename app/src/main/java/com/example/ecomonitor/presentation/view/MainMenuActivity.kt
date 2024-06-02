@@ -26,8 +26,7 @@ class MainMenuActivity : AppCompatActivity() {
 
     private fun updateUI(status: AuthenticationStatus) {
         when(status) {
-            is AuthenticationStatus.SuccessStatus -> {
-                UIUtil.showMessage(this, status.message); finish() }
+            is AuthenticationStatus.SuccessStatus -> { UIUtil.showMessage(this, status.message); finish() }
             is AuthenticationStatus.ErrorStatus -> UIUtil.showMessage(this, status.message)
             is AuthenticationStatus.LoadingStatus -> { /* showMessage(this, status.message) */ }
         }

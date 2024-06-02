@@ -1,6 +1,6 @@
 package com.example.ecomonitor.presentation.view
 
-import android.R
+import android.R.layout
 import android.os.Bundle
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
@@ -12,11 +12,10 @@ import com.example.ecomonitor.domain.model.User
 import com.example.ecomonitor.presentation.util.UIUtil.Companion.showMessage
 import com.example.ecomonitor.presentation.viewmodel.SignUpViewModel
 
-
 class SignUpActivity: AppCompatActivity() {
     private val binding by lazy { ActivitySignUpBinding.inflate(layoutInflater) }
     private val viewModel: SignUpViewModel by viewModels()
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -31,7 +30,7 @@ class SignUpActivity: AppCompatActivity() {
     private fun initRolesAdapter() {
         val adapter: ArrayAdapter<String> = ArrayAdapter<String>(
             this,
-            R.layout.simple_dropdown_item_1line, Role.values().map { it.name }
+            layout.simple_dropdown_item_1line, Role.entries.map { it.name }
         )
         binding.roleField.setAdapter(adapter)
     }

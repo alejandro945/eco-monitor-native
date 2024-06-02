@@ -10,7 +10,14 @@ import kotlinx.coroutines.tasks.await
 class FirebaseAuthService(
     private val service: FirebaseAuth = Firebase.auth
 ): AuthService {
-
+    /**
+     * Signs out the user from the app.
+     * @ Returns 'Unit' as a confirmation of the sign out operation.
+     *
+    */
+    override suspend fun signOut() {
+        return service.signOut()
+    }
     /**
      * Signs in the user with the given email and password using a local account.
      * @param email The email of the user.
@@ -39,12 +46,5 @@ class FirebaseAuthService(
      */
     override suspend fun signUp(email: String, password: String): AuthResult {
        return service.createUserWithEmailAndPassword(email, password).await()
-    }
-
-    /**
-     * Signs out the current user.
-     */
-    override suspend fun signOut() {
-        service.signOut()
     }
 }

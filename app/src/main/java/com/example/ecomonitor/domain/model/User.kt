@@ -11,7 +11,8 @@ data class User(
 )
 
 data class Profile(
-    val name: String,
-    val email: String,
-    val role: Role
+    val id: String = "",
+    val name: String = "",
+    val email: String = "",
+    val role: Role = Role.CLIENTE
 )
