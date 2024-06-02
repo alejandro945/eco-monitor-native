@@ -29,7 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/imageView10"
+                    android:id="@+id/profileBackBTN"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="?attr/homeAsUpIndicator" />
@@ -304,9 +304,88 @@
                 android:fontFamily="@font/poppins_bold"
                 android:text="Edad:"
                 android:textColor="#50636D"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/profileSaveBTN"
                 app:layout_constraintStart_toStartOf="@+id/divider6"
                 app:layout_constraintTop_toBottomOf="@+id/divider6" />
+
+            <EditText
+                android:id="@+id/profileNameET"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:ems="10"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="@+id/textView21"
+                app:layout_constraintEnd_toEndOf="@+id/divider3"
+                app:layout_constraintTop_toTopOf="@+id/textView21" />
+
+            <EditText
+                android:id="@+id/profileAddressET"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:ems="10"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="@+id/textView22"
+                app:layout_constraintEnd_toEndOf="@+id/divider4"
+                app:layout_constraintTop_toTopOf="@+id/textView22" />
+
+            <EditText
+                android:id="@+id/profileEmailET"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:ems="10"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="@+id/textView23"
+                app:layout_constraintEnd_toEndOf="@+id/divider5"
+                app:layout_constraintTop_toTopOf="@+id/textView23" />
+
+            <EditText
+                android:id="@+id/profilePhoneET"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:ems="10"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="@+id/textView24"
+                app:layout_constraintEnd_toEndOf="@+id/divider6"
+                app:layout_constraintTop_toTopOf="@+id/textView24" />
+
+            <EditText
+                android:id="@+id/profileAgeET"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:ems="10"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="@+id/textView25"
+                app:layout_constraintEnd_toEndOf="@+id/divider6"
+                app:layout_constraintTop_toTopOf="@+id/textView25" />
+
+            <EditText
+                android:id="@+id/profileCCET"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#00000000"
+                android:ems="10"
+                android:inputType="text"
+                app:layout_constraintBottom_toBottomOf="@+id/textView20"
+                app:layout_constraintEnd_toEndOf="@+id/divider2"
+                app:layout_constraintTop_toTopOf="@+id/textView20" />
+
+            <Button
+                android:id="@+id/profileSaveBTN"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginBottom="16dp"
+                android:background="#6DA0C3"
+                android:fontFamily="sans-serif"
+                android:text="Guardar"
+                android:textColor="#FBFBFB"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -359,7 +438,7 @@
             </androidx.cardview.widget.CardView>
 
             <TextView
-                android:id="@+id/textView27"
+                android:id="@+id/changePasswordBTN"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -380,10 +459,10 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView27" />
+                app:layout_constraintTop_toBottomOf="@+id/changePasswordBTN" />
 
             <TextView
-                android:id="@+id/textView28"
+                android:id="@+id/privacyPolicyBTN"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
