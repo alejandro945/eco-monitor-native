@@ -1,5 +1,6 @@
 package com.example.ecomonitor.presentation.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -71,7 +72,10 @@ class ProfileActivity : AppCompatActivity() {
         )
     }
 
-    private fun toChangePassword() {}
+    private fun toChangePassword() {
+        val intent = Intent(this, ChangePasswordActivity::class.java)
+        startActivity(intent)
+    }
 
     private fun updateProfileUI(status: TransactionStatus) {
         when(status) {

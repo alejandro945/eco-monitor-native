@@ -14,7 +14,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EcoMonitor"
         tools:targetApi="31">
-
+        <activity
+            android:name=".presentation.view.ChangePasswordActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.view.ProfileActivity"
             android:exported="false" />
