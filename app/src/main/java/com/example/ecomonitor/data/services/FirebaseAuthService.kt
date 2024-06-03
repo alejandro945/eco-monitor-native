@@ -1,5 +1,6 @@
 package com.example.ecomonitor.data.services
 
+import com.google.android.gms.auth.api.identity.SignInPassword
 import com.google.firebase.Firebase
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
@@ -11,14 +12,24 @@ class FirebaseAuthService(
     private val service: FirebaseAuth = Firebase.auth
 ): AuthService {
     /**
+     * Changes the current user's password to a new one.
+     * @param password The new password of the user.
+     */
+    override suspend fun updatePassword(password: String) {
+        service.currentUser?.updatePassword(password)?.await()
+    }
+
+    /**
      * Returns the signed in user's UID or null if it doesn't exist.
      * @return The signed in user's UID or null if it doesn't exist.
      */
     override fun getUserUID(): String? { return service.uid }
+
     /**
      * Signs out the user from the app.
     */
     override fun signOut() { service.signOut() }
+
     /**
      * Signs in the user with the given email and password using a local account.
      * @param email The email of the user.

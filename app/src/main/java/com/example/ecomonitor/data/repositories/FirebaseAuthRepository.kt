@@ -16,12 +16,23 @@ import com.example.ecomonitor.domain.enum.Role
 import com.example.ecomonitor.domain.model.Profile
 import com.example.ecomonitor.domain.model.User
 import com.google.firebase.auth.FirebaseAuthException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.GoogleAuthProvider
 
 class FirebaseAuthRepository(
     private val authService: AuthService = FirebaseAuthService(),
     private val userStorage: IStorage<Profile> = FirebaseStorage("users")
 ): AuthRepository {
+    override suspend fun updatePassword(password: String): TransactionStatus {
+        return try {
+            authService.updatePassword(password)
+            return SuccessStatus("You have changed your password successfully!")
+        }
+        catch (e:IllegalArgumentException) { ErrorStatus(e.message!!) }
+        catch (e: FirebaseAuthWeakPasswordException) { ErrorStatus(e.message!!) }
+        catch (_:Exception) { ErrorStatus("An error has occurred (have you tried to sign in again?).") }
+    }
+
     override suspend fun signOut(): TransactionStatus {
         return try {
             authService.signOut()
