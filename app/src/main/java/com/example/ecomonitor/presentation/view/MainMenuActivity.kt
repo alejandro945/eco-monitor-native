@@ -19,6 +19,12 @@ class MainMenuActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        supportFragmentManager.beginTransaction()
+            .replace(
+                binding.fragmentContainer.id,
+                DashboardFragment.newInstance())
+            .commit()
+
         binding.signOutButton.setOnClickListener { signOut() }
         binding.profileButton.setOnClickListener {
             //TEST CODE.

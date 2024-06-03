@@ -18,12 +18,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" >
 
-        <FrameLayout
-            android:id="@+id/publicServicesLayout"
+        <com.anychart.AnyChartView
+            android:id="@+id/publicServiceChart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            />
 
-        </FrameLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -39,12 +39,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" >
 
-        <FrameLayout
-            android:id="@+id/consumptionLayout"
+        <com.anychart.AnyChartView
+            android:id="@+id/consumptionChart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            />
 
-        </FrameLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
