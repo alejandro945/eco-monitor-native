@@ -13,6 +13,14 @@ class FirebaseUserRepository(
     private val authService: AuthService = FirebaseAuthService(),
     private val userStorage: IStorage<ProfileData> = FirebaseStorage("users")
 ): UserRepository {
+    override suspend fun retrieveProfileData(): ProfileData? {
+        authService.getUserUID()?.let { uid ->
+            val profileData = userStorage.get(uid)
+            return profileData.toObject(ProfileData::class.java)
+        }
+        return null
+    }
+
     override suspend fun changeProfileData(profileData: ProfileData): TransactionStatus {
         authService.getUserUID()?.let { uid ->
             userStorage.update(uid, profileData)

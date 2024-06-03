@@ -20,24 +20,52 @@ class ProfileActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
+        viewModel.profileData.observe(this) { profileData -> initializeProfileData(profileData) }
+        viewModel.dataStatus.observe(this) { status -> updateProfileUI(status) }
+        viewModel.pictureStatus.observe(this) {}
+
+        viewModel.retrieveProfileData()
+
         binding.profileProfilePicture.setOnClickListener { changeProfilePicture() }
         binding.profileSaveBTN.setOnClickListener { changeProfileData() }
         binding.changePasswordBTN.setOnClickListener { toChangePassword() }
+        binding.profileBackBTN.setOnClickListener { finish() }
+    }
 
-        viewModel.dataStatus.observe(this) { status -> updateUIForProfileData(status) }
+    private fun initializeProfileData(profileData: ProfileData?) {
+        if (profileData != null) {
+            binding.profileUsername.text = profileData.name
+            binding.profileAddress.text = profileData.address
+            binding.profileNameET.text.append(profileData.name)
+            binding.profileAddressET.text.append(profileData.address)
+            binding.profileEmailET.text.append(profileData.email)
+
+            binding.profileCCET.text.append(
+                if (profileData.cc == -1) "" else profileData.cc.toString()
+            )
+            binding.profilePhoneET.text.append(
+                if (profileData.phone == -1) "" else profileData.cc.toString()
+            )
+            binding.profileAgeET.text.append(
+                if (profileData.age == -1) "" else profileData.cc.toString()
+            )
+        } else { UIUtil.showMessage(this, "Error: You're not signed in the application.") }
     }
 
     private fun changeProfilePicture() {}
     private fun changeProfileData() {
-        try { viewModel.changeProfileData(profileDataFromInput()) }
-        catch (_:NumberFormatException) { UIUtil.showMessage(this, "Error: You have to type a number in CC, Phone and Age.") }
+        try { viewModel.changeProfileData(getInputProfileData()) }
+        catch (_:NumberFormatException) {
+            UIUtil.showMessage(this, "ERROR: You have to introduce a numeric value in CC, Phone and Age.")
+        }
     }
 
-    private fun profileDataFromInput(): ProfileData {
+    private fun getInputProfileData(): ProfileData {
         return ProfileData(
             binding.profileCCET.text.toString().toInt(),
             binding.profileNameET.text.toString(),
             binding.profileAddressET.text.toString(),
+            binding.profileEmailET.text.toString(),
             binding.profilePhoneET.text.toString().toInt(),
             binding.profileAgeET.text.toString().toInt(),
         )
@@ -45,7 +73,7 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun toChangePassword() {}
 
-    private fun updateUIForProfileData(status: TransactionStatus) {
+    private fun updateProfileUI(status: TransactionStatus) {
         when(status) {
             is SuccessStatus -> {
                 UIUtil.showMessage(this, status.message)

@@ -47,7 +47,7 @@ class FirebaseAuthRepository(
             val user = authService.signIn(credential).user
 
             //Validates that a profile exists for the user and, if it doesn't, creates it.
-            val profile = userStorage.get(user!!.uid)?.toObject(Profile::class.java)
+            val profile = userStorage.get(user!!.uid).toObject(Profile::class.java)
             if (profile == null) {
                 userStorage.save(user.uid, Profile(user.uid, user.displayName ?: "", user.email ?: "", Role.CLIENTE))
             }
