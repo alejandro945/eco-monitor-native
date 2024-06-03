@@ -1,9 +1,9 @@
 package com.example.ecomonitor.domain.model
 
-sealed class AuthenticationStatus {
-    data class SuccessStatus(val message: String): AuthenticationStatus()
-    data class ErrorStatus(val message: String): AuthenticationStatus()
-    data class LoadingStatus(val message: String): AuthenticationStatus()
+sealed class TransactionStatus {
+    data class SuccessStatus(val message: String): TransactionStatus()
+    data class ErrorStatus(val message: String): TransactionStatus()
+    data class LoadingStatus(val message: String): TransactionStatus()
 
     companion object {
         const val ACCOUNT_CREATED_MESSAGE = "You have created your account! | "

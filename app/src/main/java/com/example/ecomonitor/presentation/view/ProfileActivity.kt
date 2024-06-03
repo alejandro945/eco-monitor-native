@@ -5,7 +5,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ecomonitor.databinding.ActivityProfileBinding
 import com.example.ecomonitor.domain.model.ProfileData
-import com.example.ecomonitor.domain.model.AuthenticationStatus
+import com.example.ecomonitor.domain.model.TransactionStatus
+import com.example.ecomonitor.domain.model.TransactionStatus.SuccessStatus
+import com.example.ecomonitor.domain.model.TransactionStatus.ErrorStatus
+import com.example.ecomonitor.domain.model.TransactionStatus.LoadingStatus
 import com.example.ecomonitor.presentation.util.UIUtil
 import com.example.ecomonitor.presentation.viewmodel.ProfileViewModel
 
@@ -21,7 +24,7 @@ class ProfileActivity : AppCompatActivity() {
         binding.profileSaveBTN.setOnClickListener { changeProfileData() }
         binding.changePasswordBTN.setOnClickListener { toChangePassword() }
 
-        viewModel.dataStatus.observe(this) {status -> updateUIForProfileData(status)}
+        viewModel.dataStatus.observe(this) { status -> updateUIForProfileData(status) }
     }
 
     private fun changeProfilePicture() {}
@@ -42,11 +45,15 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun toChangePassword() {}
 
-    private fun updateUIForProfileData(status: AuthenticationStatus) {
+    private fun updateUIForProfileData(status: TransactionStatus) {
         when(status) {
-            is AuthenticationStatus.SuccessStatus -> UIUtil.showMessage(this, status.message)
-            is AuthenticationStatus.ErrorStatus -> UIUtil.showMessage(this, status.message)
-            is AuthenticationStatus.LoadingStatus -> { /* showMessage(this, status.message) */ }
+            is SuccessStatus -> {
+                UIUtil.showMessage(this, status.message)
+                binding.profileUsername.text = binding.profileNameET.text
+                binding.profileAddress.text = binding.profileAddressET.text
+            }
+            is ErrorStatus -> UIUtil.showMessage(this, status.message)
+            is LoadingStatus -> { /* showMessage(this, status.message) */ }
         }
     }
 }
