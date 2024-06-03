@@ -41,13 +41,13 @@ class ProfileActivity : AppCompatActivity() {
             binding.profileEmailET.text.append(profileData.email)
 
             binding.profileCCET.text.append(
-                if (profileData.cc == -1) "" else profileData.cc.toString()
+                if (profileData.documentId == (-1).toLong()) "" else profileData.documentId.toString()
             )
             binding.profilePhoneET.text.append(
-                if (profileData.phone == -1) "" else profileData.cc.toString()
+                if (profileData.phone == (-1).toLong()) "" else profileData.phone.toString()
             )
             binding.profileAgeET.text.append(
-                if (profileData.age == -1) "" else profileData.cc.toString()
+                if (profileData.age == (-1).toLong()) "" else profileData.age.toString()
             )
         } else { UIUtil.showMessage(this, "Error: You're not signed in the application.") }
     }
@@ -62,12 +62,12 @@ class ProfileActivity : AppCompatActivity() {
 
     private fun getInputProfileData(): ProfileData {
         return ProfileData(
-            binding.profileCCET.text.toString().toInt(),
+            binding.profileCCET.text.toString().toLong(),
             binding.profileNameET.text.toString(),
             binding.profileAddressET.text.toString(),
             binding.profileEmailET.text.toString(),
-            binding.profilePhoneET.text.toString().toInt(),
-            binding.profileAgeET.text.toString().toInt(),
+            binding.profilePhoneET.text.toString().toLong(),
+            binding.profileAgeET.text.toString().toLong(),
         )
     }
 

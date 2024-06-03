@@ -18,10 +18,10 @@ data class Profile(
 )
 
 data class ProfileData(
-    val cc: Int = -1,
+    val documentId: Long = -1,
     val name: String = "",
     val address: String = "",
     val email: String = "",
-    val phone: Int = -1,
-    val age: Int = -1
+    val phone: Long = -1,
+    val age: Long = -1
 )
