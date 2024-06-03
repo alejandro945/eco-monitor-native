@@ -14,5 +14,7 @@ sealed class AuthenticationStatus {
         const val SIGN_IN_SUCCESS_MESSAGE = "You have logged in successfully! | "
         const val EMPTY_FIELDS_MESSAGE = "One of the required fields is empty."
         const val SIGN_OUT_SUCCESS_MESSAGE = "You have logged out successfully! | "
+        const val PROFILE_DATA_SUCCESS = "You have updated your profile successfully!"
+        const val PROFILE_DATA_ERROR = "Your profile couldn't be updated due to an authentication error."
     }
 }

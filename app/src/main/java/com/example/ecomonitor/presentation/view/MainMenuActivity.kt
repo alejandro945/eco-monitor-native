@@ -1,5 +1,6 @@
 package com.example.ecomonitor.presentation.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,12 @@ class MainMenuActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.signOutButton.setOnClickListener { signOut() }
+        binding.profileButton.setOnClickListener {
+            //TEST CODE.
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+            //TEST CODE.
+        }
 
         viewModel.status.observe(this) { status -> updateUI(status) }
     }

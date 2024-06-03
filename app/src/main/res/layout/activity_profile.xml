@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F3F5F8"
-    tools:context=".presentation.view.ProfileFragment">
+    tools:context=".presentation.view.ProfileActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -336,6 +336,7 @@
                 android:layout_height="wrap_content"
                 android:background="#00000000"
                 android:ems="10"
+                android:enabled="false"
                 android:inputType="text"
                 app:layout_constraintBottom_toBottomOf="@+id/textView23"
                 app:layout_constraintEnd_toEndOf="@+id/divider5"

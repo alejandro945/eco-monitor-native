@@ -16,3 +16,11 @@ data class Profile(
     val email: String = "",
     val role: Role = Role.CLIENTE
 )
+
+data class ProfileData(
+    val cc: Int = 0,
+    val name: String = "",
+    val address: String = "",
+    val phone: Int = 0,
+    val age: Int = 0
+)

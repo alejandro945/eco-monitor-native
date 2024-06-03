@@ -11,13 +11,14 @@ class FirebaseAuthService(
     private val service: FirebaseAuth = Firebase.auth
 ): AuthService {
     /**
+     * Returns the signed in user's UID or null if it doesn't exist.
+     * @return The signed in user's UID or null if it doesn't exist.
+     */
+    override fun getUserUID(): String? { return service.uid }
+    /**
      * Signs out the user from the app.
-     * @ Returns 'Unit' as a confirmation of the sign out operation.
-     *
     */
-    override suspend fun signOut() {
-        return service.signOut()
-    }
+    override fun signOut() { service.signOut() }
     /**
      * Signs in the user with the given email and password using a local account.
      * @param email The email of the user.
