@@ -1,11 +1,12 @@
 package com.example.ecomonitor.data.repositories
 
-import com.example.ecomonitor.domain.model.AuthenticationStatus
+import com.example.ecomonitor.domain.model.TransactionStatus
 import com.example.ecomonitor.domain.model.User
 
 interface AuthRepository {
-    suspend fun signOut() : AuthenticationStatus
-    suspend fun signIn(email: String, password: String): AuthenticationStatus
-    suspend fun signIn(token: String): AuthenticationStatus
-    suspend fun signUp(user: User): AuthenticationStatus
+    suspend fun updatePassword(password: String): TransactionStatus
+    suspend fun signOut() : TransactionStatus
+    suspend fun signIn(email: String, password: String): TransactionStatus
+    suspend fun signIn(token: String): TransactionStatus
+    suspend fun signUp(user: User): TransactionStatus
 }

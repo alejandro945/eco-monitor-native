@@ -1,10 +1,14 @@
 package com.example.ecomonitor.presentation.view
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ecomonitor.databinding.ActivityMainMenuBinding
-import com.example.ecomonitor.domain.model.AuthenticationStatus
+import com.example.ecomonitor.domain.model.TransactionStatus
+import com.example.ecomonitor.domain.model.TransactionStatus.SuccessStatus
+import com.example.ecomonitor.domain.model.TransactionStatus.ErrorStatus
+import com.example.ecomonitor.domain.model.TransactionStatus.LoadingStatus
 import com.example.ecomonitor.presentation.util.UIUtil
 import com.example.ecomonitor.presentation.viewmodel.MainMenuViewModel
 
@@ -16,6 +20,12 @@ class MainMenuActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.signOutButton.setOnClickListener { signOut() }
+        binding.profileButton.setOnClickListener {
+            //TEST CODE.
+            val intent = Intent(this, ProfileActivity::class.java)
+            startActivity(intent)
+            //TEST CODE.
+        }
 
         viewModel.status.observe(this) { status -> updateUI(status) }
     }
@@ -24,11 +34,11 @@ class MainMenuActivity : AppCompatActivity() {
         viewModel.signOut()
     }
 
-    private fun updateUI(status: AuthenticationStatus) {
+    private fun updateUI(status: TransactionStatus) {
         when(status) {
-            is AuthenticationStatus.SuccessStatus -> { UIUtil.showMessage(this, status.message); finish() }
-            is AuthenticationStatus.ErrorStatus -> UIUtil.showMessage(this, status.message)
-            is AuthenticationStatus.LoadingStatus -> { /* showMessage(this, status.message) */ }
+            is ErrorStatus -> UIUtil.showMessage(this, status.message)
+            is SuccessStatus -> { UIUtil.showMessage(this, status.message); finish() }
+            is LoadingStatus -> { /* showMessage(this, status.message) */ }
         }
     }
 }

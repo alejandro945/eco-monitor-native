@@ -3,6 +3,7 @@ package com.example.ecomonitor.data.storage
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.firestore
 import kotlinx.coroutines.tasks.await
 
@@ -14,7 +15,7 @@ class FirebaseStorage<T : Any>(private val collectionName: String) : IStorage<T>
         firestore.collection(collectionName).document(key).set(value).await()
     }
 
-    override suspend fun get(key: String): DocumentSnapshot? {
+    override suspend fun get(key: String): DocumentSnapshot {
         return firestore.collection(collectionName).document(key).get().await()
     }
 
@@ -23,10 +24,10 @@ class FirebaseStorage<T : Any>(private val collectionName: String) : IStorage<T>
     }
 
     override suspend fun update(key: String, value: T) {
-        firestore.collection(collectionName).document(key).set(value).await()
+        firestore.collection(collectionName).document(key).set(value, SetOptions.merge()).await()
     }
 
-    override suspend fun list(): QuerySnapshot? {
+    override suspend fun list(): QuerySnapshot {
         return firestore.collection(collectionName).get().await()
     }
 }

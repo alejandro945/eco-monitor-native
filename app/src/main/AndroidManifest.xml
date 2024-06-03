@@ -15,6 +15,12 @@
         android:theme="@style/Theme.EcoMonitor"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.view.ChangePasswordActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.ProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.view.MainMenuActivity"
             android:exported="false" />
         <activity
@@ -33,6 +39,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>

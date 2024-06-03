@@ -6,9 +6,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ecomonitor.data.repositories.AnalyticsRepository
-import com.example.ecomonitor.domain.model.AuthenticationStatus
-import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.EMPTY_TOKEN
-import com.example.ecomonitor.domain.model.AuthenticationStatus.Companion.LOADING_MESSAGE
+import com.example.ecomonitor.domain.model.TransactionStatus
+import com.example.ecomonitor.domain.model.TransactionStatus.Companion.EMPTY_TOKEN
+import com.example.ecomonitor.domain.model.TransactionStatus.Companion.LOADING_MESSAGE
 import com.example.ecomonitor.data.repositories.AuthRepository
 import com.example.ecomonitor.data.repositories.FirebaseAnalyticsRepository
 import com.example.ecomonitor.data.repositories.FirebaseAuthRepository
@@ -20,8 +20,8 @@ class SignInViewModel(
     private val authRepository: AuthRepository = FirebaseAuthRepository(),
     private val analyticsRepository: AnalyticsRepository = FirebaseAnalyticsRepository()
 ): ViewModel() {
-    private val _status = MutableLiveData<AuthenticationStatus>()
-    val status: LiveData<AuthenticationStatus> get() = _status
+    private val _status = MutableLiveData<TransactionStatus>()
+    val status: LiveData<TransactionStatus> get() = _status
 
     fun logEvent(context: Context, eventName: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -34,7 +34,7 @@ class SignInViewModel(
     }
 
     private fun executeRepositorySignIn(email: String, password: String) {
-        _status.value = AuthenticationStatus.LoadingStatus(LOADING_MESSAGE)
+        _status.value = TransactionStatus.LoadingStatus(LOADING_MESSAGE)
         viewModelScope.launch(Dispatchers.IO) {
             val result = authRepository.signIn(email, password)
             withContext(Dispatchers.Main) { _status.value = result }
@@ -43,11 +43,11 @@ class SignInViewModel(
 
     fun signIn(token: String?) {
         token?.let { t -> executeRepositorySignIn(t) }
-        ?: { _status.value = AuthenticationStatus.ErrorStatus(EMPTY_TOKEN) }
+        ?: { _status.value = TransactionStatus.ErrorStatus(EMPTY_TOKEN) }
     }
 
     private fun executeRepositorySignIn(token: String) {
-        _status.value = AuthenticationStatus.LoadingStatus(LOADING_MESSAGE)
+        _status.value = TransactionStatus.LoadingStatus(LOADING_MESSAGE)
         viewModelScope.launch(Dispatchers.IO) {
             val result = authRepository.signIn(token)
             withContext(Dispatchers.Main) { _status.value = result }

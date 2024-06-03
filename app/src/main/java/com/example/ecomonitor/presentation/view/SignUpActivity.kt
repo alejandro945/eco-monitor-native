@@ -7,7 +7,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ecomonitor.databinding.ActivitySignUpBinding
 import com.example.ecomonitor.domain.enum.Role
-import com.example.ecomonitor.domain.model.AuthenticationStatus
+import com.example.ecomonitor.domain.model.TransactionStatus
+import com.example.ecomonitor.domain.model.TransactionStatus.SuccessStatus
+import com.example.ecomonitor.domain.model.TransactionStatus.ErrorStatus
+import com.example.ecomonitor.domain.model.TransactionStatus.LoadingStatus
 import com.example.ecomonitor.domain.model.User
 import com.example.ecomonitor.presentation.util.UIUtil.Companion.showMessage
 import com.example.ecomonitor.presentation.viewmodel.SignUpViewModel
@@ -45,11 +48,11 @@ class SignUpActivity: AppCompatActivity() {
         viewModel.signUp(user)
     }
 
-    private fun updateUI(status: AuthenticationStatus) {
+    private fun updateUI(status: TransactionStatus) {
         when(status) {
-            is AuthenticationStatus.SuccessStatus -> { showMessage(this, status.message); finish() }
-            is AuthenticationStatus.ErrorStatus -> showMessage(this, status.message)
-            is AuthenticationStatus.LoadingStatus -> { /* showMessage(this, status.message) */ }
+            is SuccessStatus -> { showMessage(this, status.message); finish() }
+            is ErrorStatus -> showMessage(this, status.message)
+            is LoadingStatus -> { /* showMessage(this, status.message) */ }
         }
     }
 }

@@ -7,21 +7,22 @@ import androidx.lifecycle.viewModelScope
 import com.example.ecomonitor.data.repositories.AuthRepository
 import com.example.ecomonitor.data.repositories.FirebaseAuthRepository
 import com.example.ecomonitor.domain.model.TransactionStatus
+import com.example.ecomonitor.domain.model.TransactionStatus.LoadingStatus
 import com.example.ecomonitor.domain.model.TransactionStatus.Companion.LOADING_MESSAGE
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class MainMenuViewModel(
+class ChangePasswordViewModel(
     private val authRepository: AuthRepository = FirebaseAuthRepository(),
-) : ViewModel(){
+): ViewModel() {
     private val _status = MutableLiveData<TransactionStatus>()
     val status: LiveData<TransactionStatus> get() = _status
 
-    fun signOut() {
-        _status.value = TransactionStatus.LoadingStatus(LOADING_MESSAGE)
+    fun updatePassword(password: String) {
+        _status.value = LoadingStatus(LOADING_MESSAGE)
         viewModelScope.launch(Dispatchers.IO) {
-            val result = authRepository.signOut()
+            val result = authRepository.updatePassword(password)
             withContext(Dispatchers.Main){ _status.value = result }
         }
     }

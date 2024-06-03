@@ -8,7 +8,10 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import com.example.ecomonitor.databinding.ActivitySignInBinding
-import com.example.ecomonitor.domain.model.AuthenticationStatus
+import com.example.ecomonitor.domain.model.TransactionStatus
+import com.example.ecomonitor.domain.model.TransactionStatus.SuccessStatus
+import com.example.ecomonitor.domain.model.TransactionStatus.ErrorStatus
+import com.example.ecomonitor.domain.model.TransactionStatus.LoadingStatus
 import com.example.ecomonitor.presentation.util.GoogleSignInUtil
 import com.example.ecomonitor.presentation.util.UIUtil.Companion.showMessage
 import com.example.ecomonitor.presentation.viewmodel.SignInViewModel
@@ -57,11 +60,11 @@ class SignInActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun updateUI(status: AuthenticationStatus) {
+    private fun updateUI(status: TransactionStatus) {
         when(status) {
-            is AuthenticationStatus.SuccessStatus -> toMainMenu()
-            is AuthenticationStatus.ErrorStatus -> showMessage(this, status.message)
-            is AuthenticationStatus.LoadingStatus -> { /* showMessage(this, status.message) */ }
+            is SuccessStatus -> toMainMenu()
+            is ErrorStatus -> showMessage(this, status.message)
+            is LoadingStatus -> { /* showMessage(this, status.message) */ }
         }
     }
 

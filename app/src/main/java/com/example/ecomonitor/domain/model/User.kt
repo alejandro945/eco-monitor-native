@@ -16,3 +16,12 @@ data class Profile(
     val email: String = "",
     val role: Role = Role.CLIENTE
 )
+
+data class ProfileData(
+    val documentId: Long = -1,
+    val name: String = "",
+    val address: String = "",
+    val email: String = "",
+    val phone: Long = -1,
+    val age: Long = -1
+)
