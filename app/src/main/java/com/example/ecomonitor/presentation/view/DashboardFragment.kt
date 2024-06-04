@@ -86,7 +86,7 @@ class DashboardFragment: Fragment() {
             queryConsumptionView(spinnerDate, spinnerSelection)
         }
 
-        viewModel.queries++
+        viewModel.addToQueriesCount()
     }
 
     private fun queryConsumptionView(spinnerDate: String, spinnerSelection: String) {
