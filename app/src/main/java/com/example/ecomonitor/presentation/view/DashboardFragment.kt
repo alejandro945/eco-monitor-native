@@ -8,7 +8,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.anychart.APIlib
 import com.anychart.AnyChart
-import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.example.ecomonitor.databinding.FragmentDashboardBinding
 import com.example.ecomonitor.presentation.viewmodel.DashboardViewModel
 
