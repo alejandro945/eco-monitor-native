@@ -18,6 +18,7 @@ import com.example.ecomonitor.presentation.viewmodel.DashboardViewModel
 
 class DashboardFragment: Fragment() {
     private val viewModel: DashboardViewModel by viewModels()
+    private var graphQueries = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,14 +66,22 @@ class DashboardFragment: Fragment() {
             val spinnerDate = binding.spinnerDate.selectedItem.toString()
             val spinnerSelection = binding.spinnerSelection.selectedItem.toString()
 
-            consumptionGraphQuery(spinnerDate, spinnerSelection)
+            if (graphQueries > 0) {
+                consumptionGraphQuery(spinnerDate, spinnerSelection)
+            }
+
+            graphQueries++
         }
 
         binding.spinnerSelection.onItemSelectedListener = onItemSelectedListener {
             val spinnerDate = binding.spinnerDate.selectedItem.toString()
             val spinnerSelection = binding.spinnerSelection.selectedItem.toString()
 
-            consumptionGraphQuery(spinnerDate, spinnerSelection)
+            if (graphQueries > 0) {
+                consumptionGraphQuery(spinnerDate, spinnerSelection)
+            }
+
+            graphQueries++
         }
     }
 
