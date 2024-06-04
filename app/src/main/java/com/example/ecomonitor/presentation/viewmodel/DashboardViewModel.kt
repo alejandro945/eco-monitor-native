@@ -1,5 +1,6 @@
 package com.example.ecomonitor.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -21,15 +22,16 @@ class DashboardViewModel(
     private val _measurements = MutableLiveData<List<ValueDataEntry>>()
     val measurements: LiveData<List<ValueDataEntry>> get() = _measurements
 
+    private val _servicesMeasurements = MutableLiveData<MutableMap<String, List<ValueDataEntry>>>(
+        mutableMapOf()
+    )
+    val servicesMeasurements: LiveData<MutableMap<String, List<ValueDataEntry>>> get() = _servicesMeasurements
+
     var mUnit: String = ""
         private set
 
     var queries = 0
         private set
-
-    fun addToQueriesCount() {
-        queries++
-    }
 
     fun getMeasurements(
         days: Int,
@@ -40,7 +42,7 @@ class DashboardViewModel(
             val result = measuresRepository.getMeasurements(days, measureUnit)
             val measurements = groupMeasuresByDateThenSum(result, pattern)
 
-            withContext(Dispatchers.Main){
+            withContext(Dispatchers.Main) {
                 _measurements.value = measurements
                 mUnit = measureUnit.toString()
             }
@@ -62,5 +64,28 @@ class DashboardViewModel(
         }
 
         return measurements
+    }
+
+    fun getServicesMeasurements(
+        days: Int,
+        pattern: String
+    ) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val kwh = measuresRepository.getMeasurements(days, MeasureUnit.KWH)
+            val m3 = measuresRepository.getMeasurements(days, MeasureUnit.M3)
+
+            val kwhMeasurements = groupMeasuresByDateThenSum(kwh, pattern)
+            val m3Measurements = groupMeasuresByDateThenSum(m3, pattern)
+
+            withContext(Dispatchers.Main) {
+                _servicesMeasurements.value?.set("kwh", kwhMeasurements)
+                _servicesMeasurements.value?.set("m3", m3Measurements)
+                _servicesMeasurements.value = _servicesMeasurements.value
+            }
+        }
+    }
+
+    fun addToQueriesCount() {
+        queries++
     }
 }

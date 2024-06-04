@@ -38,6 +38,8 @@ class DashboardFragment: Fragment() {
         binding.spinnerDate.onItemSelectedListener = onItemSelectedListener { onSelection(binding) }
         binding.spinnerSelection.onItemSelectedListener = onItemSelectedListener { onSelection(binding) }
 
+        viewModel.getServicesMeasurements(7, "dd/MM")
+
         return binding.root
     }
 
@@ -71,6 +73,25 @@ class DashboardFragment: Fragment() {
         APIlib.getInstance().setActiveAnyChartView(publicServiceChart)
         val column = AnyChart.column()
         publicServiceChart.setChart(column)
+
+        viewModel.servicesMeasurements.observe(viewLifecycleOwner) { map ->
+            showPublicServicesData(publicServiceChart, column, map)
+        }
+    }
+    private fun showPublicServicesData(
+        publicServiceChart: AnyChartView,
+        column: Cartesian,
+        map: MutableMap<String, List<ValueDataEntry>>
+    ) {
+        APIlib.getInstance().setActiveAnyChartView(publicServiceChart)
+        column.yAxis(0).title("Consumption KWH vs. M3")
+        column.removeAllSeries()
+
+        val kwhColumn = column.column(map["kwh"])
+        kwhColumn.color("#ffbb38")
+
+        val m3Column = column.column(map["m3"])
+        m3Column.color("#396aff")
     }
 
     private fun initializeSpinner(spinner: Spinner, textArrayResId: Int) {
