@@ -1,5 +1,6 @@
 package com.example.ecomonitor.data.repositories
 
+import android.util.Log
 import com.example.ecomonitor.data.storage.FirebaseStorage
 import com.example.ecomonitor.data.storage.IStorage
 import com.example.ecomonitor.domain.model.Measurement

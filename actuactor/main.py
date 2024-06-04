@@ -22,10 +22,10 @@ class Measurement:
 
 def send_measurement():
     db = firestore.client()
-    user_ref = db.collection('users').document('dD491lM0fDPyV4a4j4QLpie9LTh1')
+    user_ref = db.collection('users').document('qKNBvoxHpLNFjN94Dv1DWhnYiTy1')
     measurements_ref = user_ref.collection('measurements')
 
-    for i in range(0, 5):
+    for i in range(0, 4):
         measurement = Measurement(date=datetime.now(), value=random.randint(0, 100), measureUnit='M3')
         measurements_ref.add(measurement.to_dict())
         print(f'Sent: {measurement.to_dict()}')
