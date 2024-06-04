@@ -14,11 +14,11 @@ class FirebaseMeasuresService: MeasuresService {
         val collection = Firebase.firestore
             .collection("users")
             .document(key)
-            .collection("electricalMeasurements")
+            .collection("measurements")
 
         return collection
-            .whereGreaterThanOrEqualTo("timestamp", calendar.time)
-            .orderBy("timestamp")
+            .whereGreaterThanOrEqualTo("date", calendar.time)
+            .orderBy("date")
             .get().await()
     }
 }

@@ -4,7 +4,7 @@ import java.util.Date
 
 data class Measurement(
     val id: String = "",
-    val timestamp: Date = Date(),
+    val date: Date = Date(),
     val value: Int = 0,
     val measureUnit: String = ""
 )

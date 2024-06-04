@@ -25,11 +25,11 @@ class DashboardViewModel(
             val result = measuresRepository.getElectricalMeasurements(days)
             val format = SimpleDateFormat(pattern, Locale.US)
 
-            val listMap = result.groupBy { format.format(it.timestamp) }
+            val listMap = result.groupBy { format.format(it.date) }
             val measurements = listMap.values.map { list ->
                 var value = 0
                 list.forEach { value += it.value }
-                ValueDataEntry(format.format(list[0].timestamp), value)
+                ValueDataEntry(format.format(list[0].date), value)
             }
 
             withContext(Dispatchers.Main){
