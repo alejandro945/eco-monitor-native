@@ -1,6 +1,5 @@
 package com.example.ecomonitor.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -8,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.example.ecomonitor.data.repositories.FirebaseMeasuresRepository
 import com.example.ecomonitor.data.repositories.MeasuresRepository
-import com.example.ecomonitor.domain.enum.MeasureUnit
+import com.example.ecomonitor.domain.enum.Unit
 import com.example.ecomonitor.domain.model.Measurement
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,15 +35,15 @@ class DashboardViewModel(
     fun getMeasurements(
         days: Int,
         pattern: String,
-        measureUnit: MeasureUnit
+        unit: Unit
     ) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = measuresRepository.getMeasurements(days, measureUnit)
+            val result = measuresRepository.getMeasurements(days, unit)
             val measurements = groupMeasuresByDateThenSum(result, pattern)
 
             withContext(Dispatchers.Main) {
                 _measurements.value = measurements
-                mUnit = measureUnit.toString()
+                mUnit = unit.toString()
             }
         }
     }
@@ -71,8 +70,8 @@ class DashboardViewModel(
         pattern: String
     ) {
         viewModelScope.launch(Dispatchers.IO) {
-            val kwh = measuresRepository.getMeasurements(days, MeasureUnit.KWH)
-            val m3 = measuresRepository.getMeasurements(days, MeasureUnit.M3)
+            val kwh = measuresRepository.getMeasurements(days, Unit.KWH)
+            val m3 = measuresRepository.getMeasurements(days, Unit.M3)
 
             val kwhMeasurements = groupMeasuresByDateThenSum(kwh, pattern)
             val m3Measurements = groupMeasuresByDateThenSum(m3, pattern)

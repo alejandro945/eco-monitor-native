@@ -1,5 +1,5 @@
 package com.example.ecomonitor.domain.enum
 
-enum class MeasureUnit {
+enum class Unit {
     KWH, M3
 }

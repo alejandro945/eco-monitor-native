@@ -14,7 +14,7 @@ import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.anychart.charts.Cartesian
 import com.example.ecomonitor.R
 import com.example.ecomonitor.databinding.FragmentDashboardBinding
-import com.example.ecomonitor.domain.enum.MeasureUnit
+import com.example.ecomonitor.domain.enum.Unit
 import com.example.ecomonitor.presentation.util.UIUtil
 import com.example.ecomonitor.presentation.util.UIUtil.Companion.onItemSelectedListener
 import com.example.ecomonitor.presentation.viewmodel.DashboardViewModel
@@ -129,13 +129,13 @@ class DashboardFragment: Fragment() {
             else -> "dd/MM"
         }
 
-        val measureUnit = when(spinnerSelection) {
-            "Electricidad/día - kWh" -> MeasureUnit.KWH
-            "Agua/día - m3" -> MeasureUnit.M3
-            else -> MeasureUnit.KWH
+        val unit = when(spinnerSelection) {
+            "Electricidad/día - kWh" -> Unit.KWH
+            "Agua/día - m3" -> Unit.M3
+            else -> Unit.KWH
         }
 
-        viewModel.getMeasurements(days, pattern, measureUnit)
+        viewModel.getMeasurements(days, pattern, unit)
     }
 
     companion object {
