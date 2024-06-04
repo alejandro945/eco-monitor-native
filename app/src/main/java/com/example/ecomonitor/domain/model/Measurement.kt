@@ -3,6 +3,7 @@ package com.example.ecomonitor.domain.model
 import java.util.Date
 
 data class Measurement(
-    val date: Date,
-    val value: Int
+    val id: String = "",
+    val timestamp: Date = Date(),
+    val value: Int = 0
 )
