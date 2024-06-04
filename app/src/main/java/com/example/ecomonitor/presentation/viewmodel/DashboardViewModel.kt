@@ -18,6 +18,7 @@ class DashboardViewModel(
 ): ViewModel() {
     private val _measurements = MutableLiveData<List<ValueDataEntry>>()
     val measurements: LiveData<List<ValueDataEntry>> get() = _measurements
+    var measureUnit: String = ""
 
     fun getElectricalMeasurements(days: Int, pattern: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -25,14 +26,16 @@ class DashboardViewModel(
             val format = SimpleDateFormat(pattern, Locale.US)
 
             val listMap = result.groupBy { format.format(it.timestamp) }
-
             val measurements = listMap.values.map { list ->
                 var value = 0
                 list.forEach { value += it.value }
                 ValueDataEntry(format.format(list[0].timestamp), value)
             }
 
-            withContext(Dispatchers.Main){ _measurements.value = measurements }
+            withContext(Dispatchers.Main){
+                measureUnit = result[0].measureUnit
+                _measurements.value = measurements
+            }
         }
     }
 }
