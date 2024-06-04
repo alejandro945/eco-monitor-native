@@ -9,7 +9,7 @@ import com.example.ecomonitor.domain.model.TransactionStatus.Companion.LOADING_M
 import com.example.ecomonitor.domain.model.TransactionStatus.Companion.MISMATCH_MESSAGE
 import com.example.ecomonitor.domain.model.TransactionStatus.ErrorStatus
 import com.example.ecomonitor.domain.model.TransactionStatus.LoadingStatus
-import com.example.ecomonitor.data.repositories.AuthRepository
+import com.example.ecomonitor.data.repositories.IAuthRepository
 import com.example.ecomonitor.data.repositories.FirebaseAuthRepository
 import com.example.ecomonitor.domain.model.User
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class SignUpViewModel(
-    private val authRepository: AuthRepository = FirebaseAuthRepository()
+    private val authRepository: IAuthRepository = FirebaseAuthRepository()
 ): ViewModel() {
     private val _status = MutableLiveData<TransactionStatus>()
     val status: LiveData<TransactionStatus> get() = _status

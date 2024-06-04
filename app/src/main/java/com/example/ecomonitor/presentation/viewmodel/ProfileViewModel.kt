@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ecomonitor.data.repositories.FirebaseUserRepository
-import com.example.ecomonitor.data.repositories.UserRepository
+import com.example.ecomonitor.data.repositories.IUserRepository
 import com.example.ecomonitor.domain.model.ProfileData
 import com.example.ecomonitor.domain.model.TransactionStatus
 import com.example.ecomonitor.domain.model.TransactionStatus.Companion.LOADING_MESSAGE
@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class ProfileViewModel(
-    private val userRepository: UserRepository = FirebaseUserRepository()
+    private val userRepository: IUserRepository = FirebaseUserRepository()
 ): ViewModel() {
     private val _profileData = MutableLiveData<ProfileData?>()
     private val _dataStatus = MutableLiveData<TransactionStatus>()

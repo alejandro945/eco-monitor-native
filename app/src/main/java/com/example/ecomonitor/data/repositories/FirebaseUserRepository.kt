@@ -1,6 +1,6 @@
 package com.example.ecomonitor.data.repositories
 
-import com.example.ecomonitor.data.services.AuthService
+import com.example.ecomonitor.data.services.IAuthService
 import com.example.ecomonitor.data.services.FirebaseAuthService
 import com.example.ecomonitor.data.storage.FirebaseStorage
 import com.example.ecomonitor.data.storage.IStorage
@@ -10,9 +10,9 @@ import com.example.ecomonitor.domain.model.TransactionStatus.Companion.PROFILE_D
 import com.example.ecomonitor.domain.model.TransactionStatus.Companion.PROFILE_DATA_ERROR
 
 class FirebaseUserRepository(
-    private val authService: AuthService = FirebaseAuthService(),
+    private val authService: IAuthService = FirebaseAuthService(),
     private val userStorage: IStorage<ProfileData> = FirebaseStorage("users")
-): UserRepository {
+): IUserRepository {
     override suspend fun retrieveProfileData(): ProfileData? {
         authService.getUserUID()?.let { uid ->
             val profileData = userStorage.get(uid)

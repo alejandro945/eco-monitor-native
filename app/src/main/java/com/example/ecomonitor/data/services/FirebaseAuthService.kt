@@ -1,6 +1,5 @@
 package com.example.ecomonitor.data.services
 
-import com.google.android.gms.auth.api.identity.SignInPassword
 import com.google.firebase.Firebase
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.AuthResult
@@ -10,7 +9,7 @@ import kotlinx.coroutines.tasks.await
 
 class FirebaseAuthService(
     private val service: FirebaseAuth = Firebase.auth
-): AuthService {
+): IAuthService {
     /**
      * Changes the current user's password to a new one.
      * @param password The new password of the user.

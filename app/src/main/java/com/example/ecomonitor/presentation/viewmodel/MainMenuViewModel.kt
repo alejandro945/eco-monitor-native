@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.ecomonitor.data.repositories.AuthRepository
+import com.example.ecomonitor.data.repositories.IAuthRepository
 import com.example.ecomonitor.data.repositories.FirebaseAuthRepository
 import com.example.ecomonitor.domain.model.TransactionStatus
 import com.example.ecomonitor.domain.model.TransactionStatus.Companion.LOADING_MESSAGE
@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class MainMenuViewModel(
-    private val authRepository: AuthRepository = FirebaseAuthRepository(),
+    private val authRepository: IAuthRepository = FirebaseAuthRepository(),
 ) : ViewModel(){
     private val _status = MutableLiveData<TransactionStatus>()
     val status: LiveData<TransactionStatus> get() = _status
