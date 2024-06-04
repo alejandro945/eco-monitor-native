@@ -33,7 +33,7 @@ class DashboardViewModel(
             }
 
             withContext(Dispatchers.Main){
-                measureUnit = result[0].measureUnit
+                if (result.isNotEmpty()) { measureUnit = result[0].measureUnit }
                 _measurements.value = measurements
             }
         }
