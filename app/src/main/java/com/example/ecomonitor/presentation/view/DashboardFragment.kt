@@ -1,25 +1,26 @@
 package com.example.ecomonitor.presentation.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.AdapterView.OnItemSelectedListener
-import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.anychart.APIlib
 import com.anychart.AnyChart
+import com.anychart.AnyChartView
+import com.anychart.chart.common.dataentry.ValueDataEntry
+import com.anychart.charts.Cartesian
 import com.example.ecomonitor.R
 import com.example.ecomonitor.databinding.FragmentDashboardBinding
 import com.example.ecomonitor.domain.enum.MeasureUnit
+import com.example.ecomonitor.presentation.util.UIUtil
+import com.example.ecomonitor.presentation.util.UIUtil.Companion.onItemSelectedListener
 import com.example.ecomonitor.presentation.viewmodel.DashboardViewModel
 
 class DashboardFragment: Fragment() {
     private val viewModel: DashboardViewModel by viewModels()
-    private var graphQueries = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,65 +29,67 @@ class DashboardFragment: Fragment() {
     ): View {
         val binding: FragmentDashboardBinding = FragmentDashboardBinding.inflate(inflater, container, false)
 
-        initializeGraphOptions(binding)
+        initializeConsumptionChart(binding.consumptionChart)
+        initializePublicServiceChart(binding.publicServiceChart)
 
-        val consumptionChart = binding.consumptionChart
-        val publicServiceChart = binding.publicServiceChart
+        initializeSpinner(binding.spinnerDate, R.array.spinner_date_options)
+        initializeSpinner(binding.spinnerSelection, R.array.spinner_selection_options)
 
-        APIlib.getInstance().setActiveAnyChartView(consumptionChart)
-        val cartesian = AnyChart.cartesian()
-        consumptionChart.setChart(cartesian)
-
-        viewModel.measurements.observe(viewLifecycleOwner) {
-            APIlib.getInstance().setActiveAnyChartView(consumptionChart)
-            cartesian.yAxis(0).title(viewModel.mUnit)
-            cartesian.removeAllSeries()
-
-            val line = cartesian.line(it)
-            line.color("#6dd43d")
-
-            val column = cartesian.column(it)
-            column.color("#6dd43d")
-        }
-
-        APIlib.getInstance().setActiveAnyChartView(publicServiceChart)
-        val column = AnyChart.column()
-        publicServiceChart.setChart(column)
+        binding.spinnerDate.onItemSelectedListener = onItemSelectedListener { onSelection(binding) }
+        binding.spinnerSelection.onItemSelectedListener = onItemSelectedListener { onSelection(binding) }
 
         return binding.root
     }
 
-    private fun initializeGraphOptions(binding: FragmentDashboardBinding) {
-        val dateAdapter = createFromResource(R.array.spinner_date_options)
-        binding.spinnerDate.adapter = dateAdapter
+    private fun initializeConsumptionChart(consumptionChart: AnyChartView) {
+        APIlib.getInstance().setActiveAnyChartView(consumptionChart)
+        val cartesian = AnyChart.cartesian()
+        consumptionChart.setChart(cartesian)
 
-        val selectionAdapter = createFromResource(R.array.spinner_selection_options)
-        binding.spinnerSelection.adapter = selectionAdapter
-
-        binding.spinnerDate.onItemSelectedListener = onItemSelectedListener {
-            val spinnerDate = binding.spinnerDate.selectedItem.toString()
-            val spinnerSelection = binding.spinnerSelection.selectedItem.toString()
-
-            if (graphQueries > 0) {
-                consumptionGraphQuery(spinnerDate, spinnerSelection)
-            }
-
-            graphQueries++
-        }
-
-        binding.spinnerSelection.onItemSelectedListener = onItemSelectedListener {
-            val spinnerDate = binding.spinnerDate.selectedItem.toString()
-            val spinnerSelection = binding.spinnerSelection.selectedItem.toString()
-
-            if (graphQueries > 0) {
-                consumptionGraphQuery(spinnerDate, spinnerSelection)
-            }
-
-            graphQueries++
+        viewModel.measurements.observe(viewLifecycleOwner) { list ->
+            showQueryData(consumptionChart, cartesian, list)
         }
     }
 
-    private fun consumptionGraphQuery(spinnerDate: String, spinnerSelection: String) {
+    private fun showQueryData(
+        consumptionChart: AnyChartView,
+        cartesian: Cartesian,
+        list: List<ValueDataEntry>
+    ) {
+        APIlib.getInstance().setActiveAnyChartView(consumptionChart)
+        cartesian.yAxis(0).title(viewModel.mUnit)
+        cartesian.removeAllSeries()
+
+        val line = cartesian.line(list)
+        line.color("#6dd43d")
+
+        val column = cartesian.column(list)
+        column.color("#6dd43d")
+    }
+
+    private fun initializePublicServiceChart(publicServiceChart: AnyChartView) {
+        APIlib.getInstance().setActiveAnyChartView(publicServiceChart)
+        val column = AnyChart.column()
+        publicServiceChart.setChart(column)
+    }
+
+    private fun initializeSpinner(spinner: Spinner, textArrayResId: Int) {
+        val adapter = UIUtil.spinnerAdapterFromResource(requireContext(), textArrayResId)
+        spinner.adapter = adapter
+    }
+
+    private fun onSelection(binding: FragmentDashboardBinding) {
+        val spinnerDate = binding.spinnerDate.selectedItem.toString()
+        val spinnerSelection = binding.spinnerSelection.selectedItem.toString()
+
+        if (viewModel.queries > 0) {
+            queryConsumptionView(spinnerDate, spinnerSelection)
+        }
+
+        viewModel.queries++
+    }
+
+    private fun queryConsumptionView(spinnerDate: String, spinnerSelection: String) {
         val days = when(spinnerDate) {
             "1 semana" -> 7
             "2 semanas" -> 14
@@ -111,24 +114,7 @@ class DashboardFragment: Fragment() {
             else -> MeasureUnit.KWH
         }
 
-        viewModel.getElectricalMeasurements(days, pattern, measureUnit)
-    }
-
-    private fun createFromResource(textArrayResId: Int): ArrayAdapter<CharSequence> {
-        val adapter = ArrayAdapter.createFromResource(
-            requireContext(),
-            textArrayResId,
-            android.R.layout.simple_spinner_item
-        )
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        return adapter
-    }
-
-    private fun onItemSelectedListener(onItemSelected: () -> Unit): OnItemSelectedListener {
-        return object : OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) { onItemSelected() }
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
-        }
+        viewModel.getMeasurements(days, pattern, measureUnit)
     }
 
     companion object {

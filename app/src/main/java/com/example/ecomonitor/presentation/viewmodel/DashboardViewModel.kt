@@ -18,12 +18,14 @@ class DashboardViewModel(
     private val measuresRepository: MeasuresRepository = FirebaseMeasuresRepository()
 ): ViewModel() {
     private val _measurements = MutableLiveData<List<ValueDataEntry>>()
+
     val measurements: LiveData<List<ValueDataEntry>> get() = _measurements
     var mUnit: String = ""
+    var queries = 0
 
-    fun getElectricalMeasurements(days: Int, pattern: String, measureUnit: MeasureUnit) {
+    fun getMeasurements(days: Int, pattern: String, measureUnit: MeasureUnit) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = measuresRepository.getElectricalMeasurements(days, measureUnit)
+            val result = measuresRepository.getMeasurements(days, measureUnit)
             val format = SimpleDateFormat(pattern, Locale.US)
 
             val listMap = result.groupBy { format.format(it.date) }
