@@ -4,7 +4,7 @@ import android.content.Context
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.google.firebase.analytics.logEvent
 
-class FirebaseAnalyticsService(): AnalyticsService {
+class FirebaseAnalyticsService(): IAnalyticsService {
     /**
      * Logs an event to Firebase Analytics
      * @param context The context of the application

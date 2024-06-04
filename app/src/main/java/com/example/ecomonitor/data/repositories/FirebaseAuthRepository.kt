@@ -1,6 +1,6 @@
 package com.example.ecomonitor.data.repositories
 
-import com.example.ecomonitor.data.services.AuthService
+import com.example.ecomonitor.data.services.IAuthService
 import com.example.ecomonitor.domain.model.TransactionStatus
 import com.example.ecomonitor.domain.model.TransactionStatus.Companion.ACCOUNT_CREATED_MESSAGE
 import com.example.ecomonitor.domain.model.TransactionStatus.Companion.EMPTY_FIELDS_MESSAGE
@@ -20,9 +20,9 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.GoogleAuthProvider
 
 class FirebaseAuthRepository(
-    private val authService: AuthService = FirebaseAuthService(),
+    private val authService: IAuthService = FirebaseAuthService(),
     private val userStorage: IStorage<Profile> = FirebaseStorage("users")
-): AuthRepository {
+): IAuthRepository {
     override suspend fun updatePassword(password: String): TransactionStatus {
         return try {
             authService.updatePassword(password)

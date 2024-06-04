@@ -11,6 +11,6 @@ import android.content.Context
  * - Log an event with user properties
  * - Log an event with user properties and parameters
  */
-interface AnalyticsService {
+interface IAnalyticsService {
     suspend fun logEvent(context: Context, eventName: String)
 }

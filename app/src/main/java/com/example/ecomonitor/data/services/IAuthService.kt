@@ -11,7 +11,7 @@ import com.google.firebase.auth.AuthResult
  * - Sign up with email and password
  * - Sign out
  */
-interface AuthService {
+interface IAuthService {
     suspend fun updatePassword(password: String)
     fun getUserUID(): String?
     fun signOut()
