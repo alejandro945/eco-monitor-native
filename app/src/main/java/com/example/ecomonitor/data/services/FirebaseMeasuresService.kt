@@ -7,7 +7,7 @@ import kotlinx.coroutines.tasks.await
 import java.util.Calendar
 
 class FirebaseMeasuresService: MeasuresService {
-    override suspend fun getElectricalMeasurements(key: String, days: Int): QuerySnapshot? {
+    override suspend fun getMeasurements(key: String, days: Int, measureUnit: String): QuerySnapshot? {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_YEAR, -days)
 
@@ -17,6 +17,7 @@ class FirebaseMeasuresService: MeasuresService {
             .collection("measurements")
 
         return collection
+            .whereEqualTo("measureUnit", measureUnit)
             .whereGreaterThanOrEqualTo("date", calendar.time)
             .orderBy("date")
             .get().await()

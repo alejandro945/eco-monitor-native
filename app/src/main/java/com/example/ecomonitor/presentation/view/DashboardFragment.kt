@@ -14,6 +14,7 @@ import com.anychart.APIlib
 import com.anychart.AnyChart
 import com.example.ecomonitor.R
 import com.example.ecomonitor.databinding.FragmentDashboardBinding
+import com.example.ecomonitor.domain.enum.MeasureUnit
 import com.example.ecomonitor.presentation.viewmodel.DashboardViewModel
 
 class DashboardFragment: Fragment() {
@@ -38,7 +39,7 @@ class DashboardFragment: Fragment() {
 
         viewModel.measurements.observe(viewLifecycleOwner) {
             APIlib.getInstance().setActiveAnyChartView(consumptionChart)
-            cartesian.yAxis(0).title(viewModel.measureUnit)
+            cartesian.yAxis(0).title(viewModel.mUnit)
             cartesian.removeAllSeries()
 
             val line = cartesian.line(it)
@@ -86,8 +87,7 @@ class DashboardFragment: Fragment() {
     }
 
     private fun consumptionGraphQuery(spinnerDate: String, spinnerSelection: String) {
-        var days: Int? = null
-        days = when(spinnerDate) {
+        val days = when(spinnerDate) {
             "1 semana" -> 7
             "2 semanas" -> 14
             "1 mes" -> 30
@@ -96,8 +96,7 @@ class DashboardFragment: Fragment() {
             else -> 7
         }
 
-        var pattern: String? = null
-        pattern = when(spinnerDate) {
+        val pattern = when(spinnerDate) {
             "1 semana" -> "dd/MM"
             "2 semanas" -> "dd/MM"
             "1 mes" -> "dd/MM"
@@ -106,7 +105,13 @@ class DashboardFragment: Fragment() {
             else -> "dd/MM"
         }
 
-        viewModel.getElectricalMeasurements(days, pattern)
+        val measureUnit = when(spinnerSelection) {
+            "Electricidad/día - kWh" -> MeasureUnit.KWH
+            "Agua/día - m3" -> MeasureUnit.M3
+            else -> MeasureUnit.KWH
+        }
+
+        viewModel.getElectricalMeasurements(days, pattern, measureUnit)
     }
 
     private fun createFromResource(textArrayResId: Int): ArrayAdapter<CharSequence> {

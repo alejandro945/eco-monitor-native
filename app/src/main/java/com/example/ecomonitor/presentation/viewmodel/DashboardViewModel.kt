@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.anychart.chart.common.dataentry.ValueDataEntry
 import com.example.ecomonitor.data.repositories.FirebaseMeasuresRepository
 import com.example.ecomonitor.data.repositories.MeasuresRepository
+import com.example.ecomonitor.domain.enum.MeasureUnit
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -18,11 +19,11 @@ class DashboardViewModel(
 ): ViewModel() {
     private val _measurements = MutableLiveData<List<ValueDataEntry>>()
     val measurements: LiveData<List<ValueDataEntry>> get() = _measurements
-    var measureUnit: String = ""
+    var mUnit: String = ""
 
-    fun getElectricalMeasurements(days: Int, pattern: String) {
+    fun getElectricalMeasurements(days: Int, pattern: String, measureUnit: MeasureUnit) {
         viewModelScope.launch(Dispatchers.IO) {
-            val result = measuresRepository.getElectricalMeasurements(days)
+            val result = measuresRepository.getElectricalMeasurements(days, measureUnit)
             val format = SimpleDateFormat(pattern, Locale.US)
 
             val listMap = result.groupBy { format.format(it.date) }
@@ -33,7 +34,7 @@ class DashboardViewModel(
             }
 
             withContext(Dispatchers.Main){
-                if (result.isNotEmpty()) { measureUnit = result[0].measureUnit }
+                if (result.isNotEmpty()) { mUnit = measureUnit.toString() }
                 _measurements.value = measurements
             }
         }
