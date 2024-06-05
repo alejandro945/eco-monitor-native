@@ -45,16 +45,14 @@ class MainMenuActivity : AppCompatActivity() {
 
         viewModel.status.observe(this) { status -> updateUI(status) }
 
-        Firebase.auth.currentUser?.let {
-            viewModel.loadUser()
-            viewModel.observeMeasurements(it.uid)
-
-            viewModel.measurementsState.observe(this) { measurements ->
-                if (measurements.isNotEmpty()) {
-                    UIUtil.showMessage(this, "New Measurement: ${measurements.last().value}")
-                }
+        viewModel.measurementsState.observe(this) { measurements ->
+            if (measurements.isNotEmpty()) {
+                UIUtil.showMessage(this, "New measurement: ${ measurements.last().value }")
             }
         }
+
+        viewModel.loadUser()
+        viewModel.observeMeasurements()
     }
 
     private fun signOut() {

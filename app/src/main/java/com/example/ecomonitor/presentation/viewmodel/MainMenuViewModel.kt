@@ -21,34 +21,27 @@ import kotlinx.coroutines.withContext
 class MainMenuViewModel(
     private val authRepository: IAuthRepository = FirebaseAuthRepository(),
     private val userRepository: IUserRepository = FirebaseUserRepository(),
+    private val measurementRepository: IMeasurementRepository = FirebaseMeasurementRepository()
 ) : ViewModel(){
-    // Uninitialized repositories
-    private var measurementRepository: IMeasurementRepository? = null
+    private val measurements = mutableListOf<Measurement>()
 
-    //Private States
     private val _status = MutableLiveData<TransactionStatus>()
     private val _userState = MutableLiveData<ProfileData>()
-    private val measurements = arrayListOf<Measurement>()
-    private val _measurementsState = MutableLiveData<ArrayList<Measurement>>(measurements)
+    private val _measurementsState = MutableLiveData(measurements)
 
-    //Public States
     val status: LiveData<TransactionStatus> get() = _status
     val userState:LiveData<ProfileData> get() = _userState
-    val measurementsState:LiveData<ArrayList<Measurement>> get() = _measurementsState
+    val measurementsState:LiveData<MutableList<Measurement>> get() = _measurementsState
 
     /**
-     * Load the user from the repository
-     * and update the user state with the new user
-     * also initialize the measurement repository
-     * with the auth user document id
+     * Loads the user from the repository
+     * and updates the user state with the new user.
      */
     fun loadUser() {
         viewModelScope.launch(Dispatchers.IO) {
             val user = userRepository.retrieveProfileData()
             user?.let {
-                withContext(Dispatchers.Main) {
-                    _userState.value = it
-                }
+                withContext(Dispatchers.Main) { _userState.value = it }
             }
         }
     }
@@ -58,14 +51,10 @@ class MainMenuViewModel(
      * and update the measurements state
      * with the new measurements
      */
-    fun observeMeasurements(userId: String) {
-        //Init measurement repository
-        measurementRepository = FirebaseMeasurementRepository()
-        measurementRepository?.let {repository ->
-            repository.observe {
-                measurements.add(it)
-                _measurementsState.value = measurements
-            }
+    fun observeMeasurements() {
+        measurementRepository.observe {
+            measurements.add(it)
+            _measurementsState.value = measurements
         }
     }
 
