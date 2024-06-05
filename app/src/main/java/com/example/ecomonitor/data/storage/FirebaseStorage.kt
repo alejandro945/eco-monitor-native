@@ -35,7 +35,7 @@ class FirebaseStorage<T : Any>(private val collectionName: String) : IStorage<T>
 
     override suspend fun query(filterList: List<Filter>): QuerySnapshot {
         val collection = firestore.collection(collectionName)
-        var query = collection.where(Filter())
+        var query = collection.where(Filter.or())
 
         if (filterList.isNotEmpty()) {
             filterList.forEach { query = query.where(it) }

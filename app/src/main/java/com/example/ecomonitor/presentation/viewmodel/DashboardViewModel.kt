@@ -5,8 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.anychart.chart.common.dataentry.ValueDataEntry
-import com.example.ecomonitor.data.repositories.FirebaseMeasuresRepository
-import com.example.ecomonitor.data.repositories.MeasuresRepository
+import com.example.ecomonitor.data.repositories.FirebaseMeasurementRepository
+import com.example.ecomonitor.data.repositories.IMeasurementRepository
 import com.example.ecomonitor.domain.enum.Unit
 import com.example.ecomonitor.domain.model.Measurement
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class DashboardViewModel(
-    private val measuresRepository: MeasuresRepository = FirebaseMeasuresRepository()
+    private val measuresRepository: IMeasurementRepository = FirebaseMeasurementRepository()
 ): ViewModel() {
     private val _measurements = MutableLiveData<List<ValueDataEntry>>()
     val measurements: LiveData<List<ValueDataEntry>> get() = _measurements
