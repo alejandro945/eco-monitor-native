@@ -1,10 +1,13 @@
 package com.example.ecomonitor.data.storage
 
+import android.util.Log
 import com.google.firebase.Firebase
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.firestore
+import com.google.firebase.firestore.DocumentChange
 import kotlinx.coroutines.tasks.await
 
 
@@ -29,5 +32,18 @@ class FirebaseStorage<T : Any>(private val collectionName: String) : IStorage<T>
 
     override suspend fun list(): QuerySnapshot {
         return firestore.collection(collectionName).get().await()
+    }
+
+    override fun observe(listener: (QueryDocumentSnapshot) -> Unit) {
+        firestore.collection(collectionName).addSnapshotListener { snapshot, _ ->
+            snapshot?.documentChanges?.forEach { change ->
+                when(change.type){
+                    DocumentChange.Type.ADDED -> {
+                        listener(change.document)
+                    }
+                    else -> {}
+                }
+            }
+        }
     }
 }
