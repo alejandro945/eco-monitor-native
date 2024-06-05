@@ -31,6 +31,12 @@ class MainMenuActivity : AppCompatActivity() {
             Manifest.permission.POST_NOTIFICATIONS
         ), 1)
 
+        supportFragmentManager.beginTransaction()
+            .replace(
+                binding.fragmentContainer.id,
+                DashboardFragment.newInstance())
+            .commit()
+
         binding.signOutButton.setOnClickListener { signOut() }
         binding.profileButton.setOnClickListener {
             val intent = Intent(this, ProfileActivity::class.java)
