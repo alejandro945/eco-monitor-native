@@ -1,21 +1,19 @@
 package com.example.ecomonitor.presentation.viewmodel
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.ecomonitor.data.repositories.IAuthRepository
 import com.example.ecomonitor.data.repositories.FirebaseAuthRepository
-import com.example.ecomonitor.data.repositories.FirebaseMeasurementService
+import com.example.ecomonitor.data.repositories.FirebaseMeasurementRepository
 import com.example.ecomonitor.data.repositories.FirebaseUserRepository
-import com.example.ecomonitor.data.repositories.IMeasurementService
+import com.example.ecomonitor.data.repositories.IMeasurementRepository
 import com.example.ecomonitor.data.repositories.IUserRepository
 import com.example.ecomonitor.domain.model.Measurement
 import com.example.ecomonitor.domain.model.ProfileData
 import com.example.ecomonitor.domain.model.TransactionStatus
 import com.example.ecomonitor.domain.model.TransactionStatus.Companion.LOADING_MESSAGE
-import com.example.ecomonitor.presentation.util.UIUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -25,12 +23,14 @@ class MainMenuViewModel(
     private val userRepository: IUserRepository = FirebaseUserRepository(),
 ) : ViewModel(){
     // Uninitialized repositories
-    private var measurementRepository: IMeasurementService? = null
+    private var measurementRepository: IMeasurementRepository? = null
+
     //Private States
     private val _status = MutableLiveData<TransactionStatus>()
     private val _userState = MutableLiveData<ProfileData>()
     private val measurements = arrayListOf<Measurement>()
     private val _measurementsState = MutableLiveData<ArrayList<Measurement>>(measurements)
+
     //Public States
     val status: LiveData<TransactionStatus> get() = _status
     val userState:LiveData<ProfileData> get() = _userState
@@ -60,7 +60,7 @@ class MainMenuViewModel(
      */
     fun observeMeasurements(userId: String) {
         //Init measurement repository
-        measurementRepository = FirebaseMeasurementService(userId)
+        measurementRepository = FirebaseMeasurementRepository(userId)
         measurementRepository?.let {repository ->
             repository.observe {
                 measurements.add(it)
@@ -68,7 +68,6 @@ class MainMenuViewModel(
             }
         }
     }
-
 
     /**
      * Sign out the user from the repository

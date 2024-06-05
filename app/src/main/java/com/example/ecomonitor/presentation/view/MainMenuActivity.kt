@@ -2,8 +2,10 @@ package com.example.ecomonitor.presentation.view
 
 import android.Manifest
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.example.ecomonitor.databinding.ActivityMainMenuBinding
 import com.example.ecomonitor.domain.model.TransactionStatus
@@ -18,6 +20,8 @@ import com.google.firebase.auth.auth
 class MainMenuActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainMenuBinding.inflate(layoutInflater) }
     private val viewModel: MainMenuViewModel by viewModels()
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
@@ -32,6 +36,7 @@ class MainMenuActivity : AppCompatActivity() {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
+
         viewModel.status.observe(this) { status -> updateUI(status) }
 
         Firebase.auth.currentUser?.let {
@@ -39,13 +44,11 @@ class MainMenuActivity : AppCompatActivity() {
             viewModel.observeMeasurements(it.uid)
 
             viewModel.measurementsState.observe(this) { measurements ->
-                // Update Dashboard
-                // Notification of the last measurement
-                UIUtil.showMessage(this, "New Measurement: ${measurements.last().value}")
+                if (measurements.isNotEmpty()) {
+                    UIUtil.showMessage(this, "New Measurement: ${measurements.last().value}")
+                }
             }
         }
-
-
     }
 
     private fun signOut() {
