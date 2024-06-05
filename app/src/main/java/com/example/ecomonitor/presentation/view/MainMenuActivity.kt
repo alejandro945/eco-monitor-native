@@ -14,8 +14,6 @@ import com.example.ecomonitor.domain.model.TransactionStatus.ErrorStatus
 import com.example.ecomonitor.domain.model.TransactionStatus.LoadingStatus
 import com.example.ecomonitor.presentation.util.UIUtil
 import com.example.ecomonitor.presentation.viewmodel.MainMenuViewModel
-import com.google.firebase.Firebase
-import com.google.firebase.auth.auth
 
 class MainMenuActivity : AppCompatActivity() {
     private val binding by lazy { ActivityMainMenuBinding.inflate(layoutInflater) }
