@@ -11,6 +11,7 @@ class FirebaseMeasuresRepository(
     private val authService: IAuthService = FirebaseAuthService(),
     private val measuresService: MeasuresService = FirebaseMeasuresService()
 ): MeasuresRepository {
+    //TODO. DELETE.
     override suspend fun getMeasurements(days: Int, unit: Unit): List<Measurement> {
         authService.getUserUID()?.let { uid ->
             val list = mutableListOf<Measurement>()

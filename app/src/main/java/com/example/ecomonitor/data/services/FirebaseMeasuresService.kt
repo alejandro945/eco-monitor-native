@@ -7,6 +7,7 @@ import kotlinx.coroutines.tasks.await
 import java.util.Calendar
 
 class FirebaseMeasuresService: MeasuresService {
+    //TODO. DELETE.
     override suspend fun getMeasurements(key: String, days: Int, measureUnit: String): QuerySnapshot? {
         val calendar = Calendar.getInstance()
         calendar.add(Calendar.DAY_OF_YEAR, -days)

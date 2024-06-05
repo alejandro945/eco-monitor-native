@@ -60,7 +60,7 @@ class MainMenuViewModel(
      */
     fun observeMeasurements(userId: String) {
         //Init measurement repository
-        measurementRepository = FirebaseMeasurementRepository(userId)
+        measurementRepository = FirebaseMeasurementRepository()
         measurementRepository?.let {repository ->
             repository.observe {
                 measurements.add(it)

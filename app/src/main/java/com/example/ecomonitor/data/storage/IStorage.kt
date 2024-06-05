@@ -1,6 +1,7 @@
 package com.example.ecomonitor.data.storage
 
 import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.Filter
 import com.google.firebase.firestore.QueryDocumentSnapshot
 import com.google.firebase.firestore.QuerySnapshot
 
@@ -11,4 +12,5 @@ interface IStorage<T> {
     suspend fun update(key: String, value: T)
     suspend fun list(): QuerySnapshot
     fun observe(listener: (QueryDocumentSnapshot) -> Unit)
+    suspend fun query(filterList: List<Filter>): QuerySnapshot
 }
