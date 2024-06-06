@@ -84,7 +84,9 @@
                     android:id="@+id/profileProfilePicture"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:src="@tools:sample/avatars" />
+                    app:srcCompat="@mipmap/icon"
+                    tools:src="@mipmap/icon"
+                    tools:srcCompat="@mipmap/icon" />
             </androidx.cardview.widget.CardView>
 
             <TextView
@@ -379,8 +381,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginBottom="16dp"
-                android:background="#6DA0C3"
-                android:fontFamily="sans-serif"
+                android:background="@drawable/rounded_secondary_button"
+                android:fontFamily="@font/poppins_bold"
                 android:text="Guardar"
                 android:textColor="#FBFBFB"
                 app:layout_constraintBottom_toBottomOf="parent"
