@@ -40,6 +40,8 @@ class DevicesActivity : AppCompatActivity() {
             adapter.updateData(devices)
         }
 
+        viewModel.getDevices()
+
 
     }
 

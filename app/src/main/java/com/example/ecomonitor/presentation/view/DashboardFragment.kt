@@ -1,5 +1,6 @@
 package com.example.ecomonitor.presentation.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -35,6 +36,18 @@ class DashboardFragment: Fragment() {
 
         initializeSpinner(binding.spinnerDate, R.array.spinner_date_options)
         initializeSpinner(binding.spinnerSelection, R.array.spinner_selection_options)
+
+        binding.cardViewAlerts.setOnClickListener {
+            Log.d("DashboardFragment", "CardViewAlerts clicked")
+            val intent = Intent(super.getContext(), AlertsActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.cardViewDevices.setOnClickListener {
+            Log.d("DashboardFragment", "CardViewDevices clicked")
+            val intent = Intent(super.getContext(), DevicesActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.spinnerDate.onItemSelectedListener = onItemSelectedListener { onSelection(binding) }
         binding.spinnerSelection.onItemSelectedListener = onItemSelectedListener { onSelection(binding) }

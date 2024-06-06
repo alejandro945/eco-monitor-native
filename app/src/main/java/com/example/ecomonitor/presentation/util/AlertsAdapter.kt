@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ecomonitor.R
+import com.example.ecomonitor.databinding.AlertBinding
 import com.example.ecomonitor.databinding.DeviceBinding
-import com.example.ecomonitor.databinding.UserListItemBinding
+import com.example.ecomonitor.domain.model.Alert
 import com.example.ecomonitor.domain.model.Device
 import com.example.ecomonitor.domain.model.Profile
 
-class DevicesAdapter(var data: ArrayList<Device>) : RecyclerView.Adapter<DeviceVH>() {
+class AlertsAdapter(var data: ArrayList<Alert>) : RecyclerView.Adapter<AlertVH>() {
 
     //Listeners
     var chatButtonAction: ((Profile) -> Unit)? = null
@@ -29,37 +30,29 @@ class DevicesAdapter(var data: ArrayList<Device>) : RecyclerView.Adapter<DeviceV
         data.add(Device("Device 10"))
     }*/
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceVH {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.device, parent, false)
-        return DeviceVH(view)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlertVH {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.alert, parent, false)
+        return AlertVH(view)
     }
 
     override fun getItemCount(): Int = data.size
 
-    fun updateData(newData: List<Device>) {
+    fun updateData(newData: List<Alert>) {
         data.clear()
         data.addAll(newData)
         notifyDataSetChanged()  // Asegúrate de llamar a notifyDataSetChanged
     }
 
-    override fun onBindViewHolder(holder: DeviceVH, position: Int) {
-        Log.d("DeviceAdapter", "Binding device at position $position: ${data[position]}")
+    override fun onBindViewHolder(holder: AlertVH, position: Int) {
+        Log.d("AlertAdapter", "Binding alert at position $position: ${data[position]}")
         holder.name.text = data[position].name
-        holder.location.text = data[position].location
+        holder.date.text = data[position].date.toString()
     }
-
 }
 
-class DeviceVH(root: View) : RecyclerView.ViewHolder(root) {
-    private val binding = DeviceBinding.bind(root)
-    val name = binding.deviceNameTV
-    val image = binding.deviceImage
-    val location = binding.deviceLocationTV
+class AlertVH(root: View) : RecyclerView.ViewHolder(root) {
+    private val binding = AlertBinding.bind(root)
+    val name = binding.alertNameTV
+    val image = binding.alertImage
+    val date = binding.alertDateTV
 }
-
-
-
-
-
-
-
