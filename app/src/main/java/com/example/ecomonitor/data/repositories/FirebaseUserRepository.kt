@@ -35,6 +35,10 @@ class FirebaseUserRepository(
         return TransactionStatus.ErrorStatus(PROFILE_DATA_ERROR)
     }
 
+    override fun getUserId(): String {
+        return authService.getUserUID() ?: ""
+    }
+
     override suspend fun getAllUsers(): List<Profile> {
         return try {
             val result = userStorage.list()

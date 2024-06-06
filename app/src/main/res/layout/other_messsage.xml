@@ -23,7 +23,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:contentDescription="User image"
-            android:src="@tools:sample/avatars" />
+            android:src="@drawable/ic_launcher_foreground" />
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView

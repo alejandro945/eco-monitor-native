@@ -8,5 +8,6 @@ interface IUserRepository {
     suspend fun retrieveProfileData(): ProfileData?
     suspend fun changeProfileData(profileData: ProfileData): TransactionStatus
 
+    fun getUserId() : String
     suspend fun getAllUsers(): List<Profile>
 }

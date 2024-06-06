@@ -37,11 +37,16 @@ class SystemUsersActivity : AppCompatActivity() {
             // TODO: Change to ChatActivity
             // Change to ChatActivity
             // And change putextra to receiver_id and messeger_id
-            profile -> val intent = Intent(this, ProfileActivity::class.java)
+            profile -> val intent = Intent(this, ChatActivity::class.java)
             intent.putExtra("profile_id", profile.id)
             intent.putExtra("profile_name", profile.name)
             intent.putExtra("profile_email", profile.email)
             intent.putExtra("profile_role", profile.role)
+            startActivity(intent)
+        }
+
+        binding.GoToDashboard.setOnClickListener {
+            val intent = Intent(this, MainMenuActivity::class.java)
             startActivity(intent)
         }
 

@@ -20,12 +20,13 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
-        <ImageView
-            android:id="@+id/imageView8"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:contentDescription="User image"
-            android:src="@tools:sample/avatars" />
+		<ImageView
+			android:id="@+id/imageView8"
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:contentDescription="User image"
+			android:src="@drawable/user_edittext_icon" />
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
