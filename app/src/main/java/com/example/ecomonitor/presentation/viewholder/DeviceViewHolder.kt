@@ -14,5 +14,4 @@ class DeviceViewHolder(root: View) : RecyclerView.ViewHolder(root) {
     val location = binding.deviceLocationTV
 
 
-
 }

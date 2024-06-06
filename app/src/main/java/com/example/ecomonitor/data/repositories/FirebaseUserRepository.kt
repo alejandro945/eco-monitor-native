@@ -1,18 +1,24 @@
 package com.example.ecomonitor.data.repositories
 
+import android.util.Log
 import com.example.ecomonitor.data.services.IAuthService
 import com.example.ecomonitor.data.services.FirebaseAuthService
 import com.example.ecomonitor.data.storage.FirebaseStorage
 import com.example.ecomonitor.data.storage.IStorage
+import com.example.ecomonitor.domain.model.Profile
 import com.example.ecomonitor.domain.model.ProfileData
 import com.example.ecomonitor.domain.model.TransactionStatus
 import com.example.ecomonitor.domain.model.TransactionStatus.Companion.PROFILE_DATA_SUCCESS
 import com.example.ecomonitor.domain.model.TransactionStatus.Companion.PROFILE_DATA_ERROR
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.tasks.await
 
 class FirebaseUserRepository(
     private val authService: IAuthService = FirebaseAuthService(),
     private val userStorage: IStorage<ProfileData> = FirebaseStorage("users")
 ): IUserRepository {
+
+    private val firestore = FirebaseFirestore.getInstance()
     override suspend fun retrieveProfileData(): ProfileData? {
         authService.getUserUID()?.let { uid ->
             val profileData = userStorage.get(uid)
@@ -27,5 +33,23 @@ class FirebaseUserRepository(
             return TransactionStatus.SuccessStatus(PROFILE_DATA_SUCCESS)
         }
         return TransactionStatus.ErrorStatus(PROFILE_DATA_ERROR)
+    }
+
+    override fun getUserId(): String {
+        return authService.getUserUID() ?: ""
+    }
+
+    override suspend fun getRole(): String {
+        return userStorage.get(authService.getUserUID() ?: "").getString("role") ?: ""
+    }
+
+    override suspend fun getAllUsers(): List<Profile> {
+        return try {
+            val result = userStorage.list()
+            Log.d("Users", result.documents.toString())
+            result.documents.mapNotNull { it.toObject(Profile::class.java) }
+        } catch (e: Exception) {
+            emptyList()
+        }
     }
 }
