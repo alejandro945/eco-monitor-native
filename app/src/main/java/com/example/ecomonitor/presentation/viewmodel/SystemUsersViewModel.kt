@@ -1,5 +1,6 @@
 package com.example.ecomonitor.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -23,6 +24,7 @@ class SystemUsersViewModel(
     fun fetchUsers() {
         viewModelScope.launch(Dispatchers.IO) {
             val usersList = userRepository.getAllUsers()
+            Log.d("ViewModel", "Users fetched: ${usersList.size}")
             _users.postValue(usersList)
         }
     }

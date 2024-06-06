@@ -1,5 +1,6 @@
 package com.example.ecomonitor.data.repositories
 
+import android.util.Log
 import com.example.ecomonitor.data.services.IAuthService
 import com.example.ecomonitor.data.services.FirebaseAuthService
 import com.example.ecomonitor.data.storage.FirebaseStorage
@@ -37,6 +38,7 @@ class FirebaseUserRepository(
     override suspend fun getAllUsers(): List<Profile> {
         return try {
             val result = userStorage.list()
+            Log.d("Users", result.documents.toString())
             result.documents.mapNotNull { it.toObject(Profile::class.java) }
         } catch (e: Exception) {
             emptyList()

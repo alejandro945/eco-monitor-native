@@ -41,6 +41,11 @@ class MainMenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.usersButton.setOnClickListener {
+            val intent = Intent(this, SystemUsersActivity::class.java)
+            startActivity(intent)
+        }
+
         viewModel.status.observe(this) { status -> updateUI(status) }
 
         viewModel.measurementsState.observe(this) { measurements ->
