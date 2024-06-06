@@ -12,7 +12,7 @@ class DeviceAdapter : Adapter<DeviceViewHolder>() {
 
     private var devices: ArrayList<Device> = arrayListOf()
 
-    init {
+    /*init {
         devices.add(Device("Device 1"))
         devices.add(Device("Device 2"))
         devices.add(Device("Device 3"))
@@ -23,7 +23,7 @@ class DeviceAdapter : Adapter<DeviceViewHolder>() {
         devices.add(Device("Device 8"))
         devices.add(Device("Device 9"))
         devices.add(Device("Device 10"))
-    }
+    }*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceViewHolder {
         val layoutInflater : LayoutInflater = LayoutInflater.from(parent.context)

@@ -19,13 +19,11 @@
         app:tabTextColor="#63C634">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabAllDevices"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Todos" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabEnergyDevices"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Electricidad" />
@@ -37,13 +35,13 @@
             android:text="Agua" />
     </com.google.android.material.tabs.TabLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/viewPager"
-        android:layout_width="0dp"
-        android:layout_height="699dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/devicesRecyclerView"
+        android:layout_width="391dp"
+        android:layout_height="742dp"
+        android:layout_marginTop="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
