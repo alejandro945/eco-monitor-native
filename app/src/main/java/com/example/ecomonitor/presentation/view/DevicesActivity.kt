@@ -2,23 +2,27 @@ package com.example.ecomonitor.presentation.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.ecomonitor.R
+import com.example.ecomonitor.adapter.DeviceAdapter
 import com.example.ecomonitor.adapter.DeviceTabsAdapter
 import com.example.ecomonitor.databinding.ActivityDevicesBinding
+import com.example.ecomonitor.databinding.DeviceListBinding
 import com.google.android.material.tabs.TabLayout
 
 class DevicesActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDevicesBinding
+    private lateinit var binding: DeviceListBinding
 
     private lateinit var tabLayout: TabLayout
     private lateinit var viewPager: ViewPager2
     private lateinit var deviceTabsAdapter: DeviceTabsAdapter
+    private lateinit var deviceAdapter: DeviceAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityDevicesBinding.inflate(layoutInflater)
+        binding = DeviceListBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
 
@@ -50,6 +54,12 @@ class DevicesActivity : AppCompatActivity() {
                 tabLayout.getTabAt(position)?.select()
             }
         })
+
+        deviceAdapter = DeviceAdapter()
+        binding.deviceList.adapter = deviceAdapter
+        binding.deviceList.layoutManager = LinearLayoutManager(this)
+        binding.deviceList.setHasFixedSize(true)
+
 
     }
 

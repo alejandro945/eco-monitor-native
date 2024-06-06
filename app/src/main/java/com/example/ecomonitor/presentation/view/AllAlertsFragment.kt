@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.ecomonitor.databinding.AllAlertsFragmentBinding
+import com.example.ecomonitor.databinding.DeviceListBinding
 
 class AllAlertsFragment: Fragment() {
 
@@ -14,7 +14,7 @@ class AllAlertsFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val binding = AllAlertsFragmentBinding.inflate(inflater, container, false)
+        val binding = DeviceListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
