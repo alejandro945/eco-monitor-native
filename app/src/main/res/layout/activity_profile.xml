@@ -84,7 +84,9 @@
                     android:id="@+id/profileProfilePicture"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    tools:src="@tools:sample/avatars" />
+                    app:srcCompat="@mipmap/icon"
+                    tools:src="@mipmap/icon"
+                    tools:srcCompat="@mipmap/icon" />
             </androidx.cardview.widget.CardView>
 
             <TextView
