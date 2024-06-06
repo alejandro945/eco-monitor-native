@@ -1,5 +1,6 @@
 package com.example.ecomonitor.presentation.viewmodel
 
+import android.widget.Button
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -42,6 +43,27 @@ class MainMenuViewModel(
             val user = userRepository.retrieveProfileData()
             user?.let {
                 withContext(Dispatchers.Main) { _userState.value = it }
+            }
+        }
+    }
+
+    suspend fun getRole(): String {
+        return userRepository.getRole()
+    }
+
+    fun determineVisibility(providerButton: Button, clientButton: Button) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val role = getRole()
+            if (role == "CLIENTE") {
+                withContext(Dispatchers.Main) {
+                    providerButton.visibility = Button.GONE
+                    clientButton.visibility = Button.VISIBLE
+                }
+            } else if (role == "PROVEEDOR") {
+                withContext(Dispatchers.Main) {
+                    providerButton.visibility = Button.VISIBLE
+                    clientButton.visibility = Button.GONE
+                }
             }
         }
     }
