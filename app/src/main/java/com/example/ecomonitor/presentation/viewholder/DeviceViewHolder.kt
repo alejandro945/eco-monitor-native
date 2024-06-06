@@ -8,6 +8,5 @@ class DeviceViewHolder(root: View) : ViewHolder(root) {
 
     private val binding = DeviceBinding.bind(root)
 
-    binding
 
 }

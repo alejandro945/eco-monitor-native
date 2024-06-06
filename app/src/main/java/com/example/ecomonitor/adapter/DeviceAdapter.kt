@@ -8,7 +8,7 @@ import com.example.ecomonitor.domain.model.Device
 import com.example.ecomonitor.presentation.viewholder.DeviceViewHolder
 import com.example.ecomonitor.R
 
-class DeviceAdapter : Adapter<DeviceViewHolder> {
+class DeviceAdapter : Adapter<DeviceViewHolder>() {
 
     private var devices: ArrayList<Device> = arrayListOf()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceViewHolder {
