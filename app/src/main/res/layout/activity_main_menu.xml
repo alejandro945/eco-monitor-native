@@ -8,38 +8,57 @@
     tools:context=".presentation.view.MainMenuActivity">
 
     <Button
+        android:id="@+id/profileButton"
+        android:layout_width="0dp"
+        android:layout_height="31dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/rounded_secondary_button"
+        android:fontFamily="@font/poppins_bold"
+        android:text="PROFILE"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/usersButton"
+        app:layout_constraintStart_toEndOf="@+id/signOutButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/usersButton"
+        android:layout_width="101dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_secondary_button"
+        android:fontFamily="@font/poppins_bold"
+        android:text="USUARIOS"
+        android:textColor="#FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profileButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
         android:id="@+id/signOutButton"
         android:layout_width="86dp"
         android:layout_height="33dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="12dp"
         android:background="@drawable/rounded_secondary_button"
         android:fontFamily="@font/poppins_bold"
         android:text="SALIR"
         android:textColor="@color/white"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintEnd_toStartOf="@+id/profileButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
-
-    <Button
-        android:id="@+id/profileButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="PROFILE"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.024" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragmentContainer"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="389dp"
+        android:layout_height="734dp"
         android:layout_marginTop="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -65,25 +84,13 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="2dp"
         android:fontFamily="@font/poppins_bold"
         android:text="Dashboard"
         android:textColor="#343C68"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/fragmentContainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profileButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.444" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signOutButton" />
 
-    <Button
-        android:id="@+id/usersButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="USUARIOS"
-        app:layout_constraintBottom_toBottomOf="@+id/fragmentContainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/profileButton"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.025" />
 </androidx.constraintlayout.widget.ConstraintLayout>
