@@ -1,5 +1,6 @@
 package com.example.ecomonitor.presentation.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,6 +15,7 @@ import com.example.ecomonitor.adapter.DeviceTabsAdapter
 import com.example.ecomonitor.databinding.ActivityDevicesBinding
 import com.example.ecomonitor.databinding.ActivitySystemUsersBinding
 import com.example.ecomonitor.presentation.util.DevicesAdapter
+import com.example.ecomonitor.presentation.util.UIUtil
 import com.example.ecomonitor.presentation.viewmodel.DeviceViewModel
 import com.example.ecomonitor.presentation.viewmodel.SystemUsersViewModel
 import com.google.android.material.tabs.TabLayout
@@ -40,8 +42,18 @@ class DevicesActivity : AppCompatActivity() {
             adapter.updateData(devices)
         }
 
+        viewModel.getDevices()
+
+        binding.deviceBackBTN.setOnClickListener { finish() }
+
+        binding.addDevice.setOnClickListener{
+            val intent = Intent(this, NewDeviceActivity::class.java)
+            startActivity(intent)
+        }
 
     }
+
+
 
 
 }
