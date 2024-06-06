@@ -41,6 +41,10 @@ class MainMenuActivity : AppCompatActivity() {
             val intent = Intent(this, ProfileActivity::class.java)
             startActivity(intent)
         }
+        /*binding.goToDevices.setOnClickListener {
+            val intent = Intent(this, DevicesActivity::class.java)
+            startActivity(intent)
+        }*/
 
 
         determineVisibility(binding.usersButton, binding.clientChatBtn)
