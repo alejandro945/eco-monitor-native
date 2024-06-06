@@ -43,8 +43,7 @@ class AlertsActivity : AppCompatActivity() {
 
         val returnButton = findViewById<ImageView>(R.id.returnButton)
         returnButton.setOnClickListener {
-            val intent = Intent(this, MainMenuActivity::class.java)
-            startActivity(intent)
+            finish()
         }
 
         viewModel.alerts.observe(this) { alerts ->
