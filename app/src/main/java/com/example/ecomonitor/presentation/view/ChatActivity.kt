@@ -38,7 +38,7 @@ class ChatActivity : AppCompatActivity() {
         }
 
         binding.GoBackBtn.setOnClickListener {
-            val intent = Intent(this, SystemUsersActivity::class.java)
+            val intent = Intent(this, MainMenuActivity::class.java)
             startActivity(intent)
         }
 

@@ -39,6 +39,10 @@ class FirebaseUserRepository(
         return authService.getUserUID() ?: ""
     }
 
+    override suspend fun getRole(): String {
+        return userStorage.get(authService.getUserUID() ?: "").getString("role") ?: ""
+    }
+
     override suspend fun getAllUsers(): List<Profile> {
         return try {
             val result = userStorage.list()

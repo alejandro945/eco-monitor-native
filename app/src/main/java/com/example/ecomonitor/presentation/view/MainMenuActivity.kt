@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.widget.Button
 import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -41,8 +42,15 @@ class MainMenuActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+        determineVisibility(binding.usersButton, binding.clientChatBtn)
         binding.usersButton.setOnClickListener {
             val intent = Intent(this, SystemUsersActivity::class.java)
+            startActivity(intent)
+        }
+
+        binding.clientChatBtn.setOnClickListener {
+            val intent = Intent(this, ChatActivity::class.java)
             startActivity(intent)
         }
 
@@ -58,8 +66,21 @@ class MainMenuActivity : AppCompatActivity() {
         viewModel.observeMeasurements()
     }
 
+    private fun determineVisibility(providerButton: Button, clientButton: Button) {
+        viewModel.determineVisibility(providerButton, clientButton)
+    }
+
+
+
     private fun signOut() {
         viewModel.signOut()
+        returnToSignIn()
+
+    }
+
+    private fun returnToSignIn() {
+        val intent = Intent(this, SignInActivity::class.java)
+        startActivity(intent)
     }
 
     private fun updateUI(status: TransactionStatus) {
