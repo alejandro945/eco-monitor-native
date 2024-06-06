@@ -4,86 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.view.DevicesActivity"
-    android:background="#F5F7FA">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="match_parent"
-        android:layout_height="70dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="26dp"
-            android:fontFamily="@font/poppins_bold"
-            android:text="Dispositivos"
-            android:textColor="#343C6A"
-            android:textSize="20sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView11"
-            android:layout_width="35dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="30dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/menu_icon" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/rounded_edittext_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    tools:context=".presentation.view.DevicesActivity">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="30dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/viewPager"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:tabTextAppearance="@style/CustomTabText"
-        app:tabTextColor="#63c634">
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabTextColor="#63C634">
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabTodas"
+            android:id="@+id/tabAllDevices"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Todas"
-            tools:layout_editor_absoluteX="2dp"
-            tools:layout_editor_absoluteY="286dp" />
+            android:text="Todos" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabElectricidad"
+            android:id="@+id/tabEnergyDevices"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Electricidad"
-            tools:layout_editor_absoluteX="136dp"
-            tools:layout_editor_absoluteY="326dp" />
+            android:text="Electricidad" />
 
         <com.google.android.material.tabs.TabItem
-            android:id="@+id/tabAgua"
+            android:id="@+id/tabWaterDevices"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Agua" />
@@ -91,15 +38,11 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="409dp"
+        android:layout_height="699dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/top_corners_rounded"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
-
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>

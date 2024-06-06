@@ -1,6 +1,9 @@
 package com.example.ecomonitor.presentation.view
 
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
@@ -10,18 +13,21 @@ import com.google.android.material.tabs.TabLayout
 import com.example.ecomonitor.R
 
 
-class AlertsActivity : AppCompatActivity() {
+class AlertsActivity : Fragment() {
 
-    private val binding by lazy { ActivityAlertsBinding.inflate(layoutInflater) }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        val binding = ActivityAlertsBinding.inflate(layoutInflater, container, false)
+        return binding.root
     }
 
-    fun showFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction().replace(R.id.fragmentContainer, fragment).commit()
+    companion object {
+        fun newInstance(): AlertsActivity {
+            return AlertsActivity()
+        }
     }
 
 }

@@ -41,4 +41,15 @@
         app:layout_constraintTop_toBottomOf="@+id/profileButton">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/goToDevices"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Devices"
+        app:layout_constraintBottom_toTopOf="@+id/fragmentContainer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/profileButton"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

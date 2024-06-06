@@ -17,10 +17,10 @@
         android:theme="@style/Theme.EcoMonitor"
         tools:targetApi="31">
         <activity
-            android:name=".presentation.view.test"
+            android:name=".presentation.view.DevicesActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.view.DevicesActivity"
+            android:name=".presentation.view.test"
             android:exported="false" />
         <activity
             android:name=".presentation.view.AlertsActivity"

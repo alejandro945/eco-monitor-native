@@ -2,24 +2,10 @@ package com.example.ecomonitor.presentation.view
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentPagerAdapter
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class AlertsFragmentAdapter (
-    fragmentManager: FragmentManager,
-    lifecycle: Lifecycle
-) : FragmentStateAdapter(fragmentManager, lifecycle) {
+class AlertsFragmentAdapter:  {
 
-    override fun getItemCount(): Int {
-        return 3
-    }
-
-    override fun createFragment(position: Int): Fragment {
-        return when (position) {
-            0 -> AllAlertsFragment.newInstance()
-            1 -> EnergyAlertsFragment.newInstance()
-            2 -> AllAlertsFragment.newInstance()
-            else -> throw IllegalArgumentException("Invalid position")
-        }
-    }
 }
