@@ -18,4 +18,5 @@ interface IAuthService {
     suspend fun signIn(email: String, password: String): AuthResult
     suspend fun signIn(credential: AuthCredential): AuthResult
     suspend fun signUp(email: String, password: String): AuthResult
+
 }

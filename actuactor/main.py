@@ -25,9 +25,9 @@ class Measurement:
 
 def send_measurement():
     db = firestore.client()
-    user_ref = db.collection('users').document('dD491lM0fDPyV4a4j4QLpie9LTh1')
+    user_ref = db.collection('users').document('qKNBvoxHpLNFjN94Dv1DWhnYiTy1')
     measurements_ref = user_ref.collection('measurements')
-    device_ref = user_ref.collection('devices').document('USKNvHqdeR9sQaFHBKNA')
+    device_ref = user_ref.collection('devices').document('sQE6O12Ox2M8iVqu7lnJ')
 
     for i in range(0, 5):
         measurement = Measurement(date=datetime.now(), value=random.randint(0, 100), measureUnit='KWH', deviceRef=device_ref)
