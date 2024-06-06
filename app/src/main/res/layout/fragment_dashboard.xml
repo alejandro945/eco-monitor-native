@@ -77,7 +77,10 @@
                     android:layout_height="match_parent"
                     app:srcCompat="@mipmap/budget"
                     tools:src="@android:color/holo_orange_light" />
+<<<<<<< HEAD
 
+=======
+>>>>>>> 84f7c9db3cebc29c714be35263bcaf4a5769a6ff
             </androidx.cardview.widget.CardView>
 
             <TextView
