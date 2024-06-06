@@ -11,7 +11,7 @@
         android:id="@+id/profileButton"
         android:layout_width="0dp"
         android:layout_height="31dp"
-        android:layout_marginStart="12dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/rounded_secondary_button"
         android:fontFamily="@font/poppins_bold"
@@ -23,9 +23,9 @@
 
     <Button
         android:id="@+id/usersButton"
-        android:layout_width="101dp"
-        android:layout_height="23dp"
-        android:layout_marginStart="6dp"
+        android:layout_width="100dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:background="@drawable/rounded_secondary_button"
@@ -34,7 +34,7 @@
         android:textColor="#FFFFFF"
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/profileButton"
+        app:layout_constraintStart_toEndOf="@+id/goToDevices"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
@@ -83,9 +83,9 @@
 
     <Button
         android:id="@+id/goToDevices"
-        android:layout_width="105dp"
-        android:layout_height="26dp"
-        android:layout_marginStart="8dp"
+        android:layout_width="87dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="4dp"
         android:layout_marginTop="4dp"
         android:background="@drawable/rounded_secondary_button"
         android:fontFamily="@font/poppins_bold"
