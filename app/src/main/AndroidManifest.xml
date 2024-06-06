@@ -38,8 +38,15 @@
             android:name=".presentation.view.SignUpActivity"
             android:exported="false" />
         <activity
+            android:name=".presentation.view.SystemUsersActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.view.ChatActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.view.SignInActivity"
             android:exported="true">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
