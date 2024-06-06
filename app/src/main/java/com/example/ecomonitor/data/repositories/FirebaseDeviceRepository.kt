@@ -19,4 +19,9 @@ class FirebaseDeviceRepository(
         }
 
     }
+
+    override suspend fun addDevice(device: Device) {
+        val newKey = deviceStorage.list().documents.size.toString()
+        deviceStorage.save(newKey, device)
+    }
 }

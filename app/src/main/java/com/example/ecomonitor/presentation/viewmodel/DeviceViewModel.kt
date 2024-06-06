@@ -7,6 +7,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.ecomonitor.data.repositories.FirebaseDeviceRepository
 import com.example.ecomonitor.data.repositories.IDeviceRepository
 import com.example.ecomonitor.domain.model.Device
+import com.example.ecomonitor.domain.model.ProfileData
+import com.example.ecomonitor.domain.model.TransactionStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -21,6 +23,12 @@ class DeviceViewModel(
         viewModelScope.launch(Dispatchers.IO) {
             val result = devicesRepository.getDevices()
             _devices.postValue(result)
+        }
+    }
+
+    fun addDevice(device: Device) {
+        viewModelScope.launch(Dispatchers.IO) {
+            devicesRepository.addDevice(device)
         }
     }
 

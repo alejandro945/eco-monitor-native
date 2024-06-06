@@ -5,4 +5,6 @@ import com.example.ecomonitor.domain.model.Measurement
 
 interface IDeviceRepository {
     suspend fun getDevices(): List<Device>
+
+    suspend fun addDevice(device: Device)
 }

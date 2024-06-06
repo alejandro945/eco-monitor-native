@@ -1,8 +1,11 @@
 package com.example.ecomonitor.presentation.view
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.ImageView
 import androidx.activity.viewModels
 import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,8 +45,19 @@ class DevicesActivity : AppCompatActivity() {
 
         viewModel.getDevices()
 
+        val deviceBackBtn = findViewById<ImageView>(R.id.deviceBackBTN)
+        deviceBackBtn.setOnClickListener { finish() }
+
+        val addDeviceBtn = findViewById<Button>(R.id.addDevice)
+
+        addDeviceBtn.setOnClickListener{
+            val intent = Intent(this, NewDeviceActivity::class.java)
+            startActivity(intent)
+        }
 
     }
+
+
 
 
 }
